@@ -334,6 +334,41 @@ test('contacts appear once in the introduction and the old contact anchor remain
   await page.goto('/');
   const contacts = page.locator('.hero #contact');
   await expect(contacts.locator('a')).toHaveText(['Email ↗', 'LinkedIn ↗', 'GitHub ↗', 'ORCID ↗', 'View CV ↗']);
+  await expect(page.locator('.hero-positions li')).toHaveText([
+    'Master of Science in Computer Science (Online) — Georgia Tech',
+    'Senior Application Developer IC3 — Oracle',
+    'Bachelor of Technology in Mechanical Engineering — NIT Durgapur',
+  ]);
+  const positions = page.locator('.hero-positions');
+  await expect(positions).toHaveCSS('color', 'rgb(0, 0, 0)');
+  await expect(positions).toHaveCSS('font-family', '"Exo 2", Helvetica, Arial, sans-serif');
+  await expect(positions).toHaveCSS('font-weight', '600');
+  await page.evaluate(() => document.fonts.ready);
+  expect(await page.evaluate(() => [...document.fonts].some(font => font.family === 'Exo 2' && font.status === 'loaded'))).toBe(true);
+  for (const heading of await page.locator('h3').all()) {
+    await expect(heading).toHaveCSS('font-family', '"Exo 2", Helvetica, Arial, sans-serif');
+  }
+  const cdp = await page.context().newCDPSession(page);
+  await cdp.send('DOM.enable');
+  await cdp.send('CSS.enable');
+  const { root } = await cdp.send('DOM.getDocument');
+  for (const [selector, family] of [
+    ['h1', 'Playfair Display'], ['h2', 'Playfair Display'], ['h3', 'Exo 2'],
+    ['.hero-positions li span', 'Exo 2'],
+    ['.lede', 'Exo 2'], ['.eyebrow', 'Exo 2'], ['.identity .name', 'Exo 2'],
+    ['.site-nav a', 'Exo 2'], ['.card-copy p', 'Exo 2'],
+    ['.external-arrow', 'Inter'], ['.directional-arrow', 'Inter'],
+  ]) {
+    const { nodeId } = await cdp.send('DOM.querySelector', { nodeId: root.nodeId, selector });
+    const { fonts } = await cdp.send('CSS.getPlatformFontsForNode', { nodeId });
+    expect(fonts.length).toBeGreaterThan(0);
+    expect(fonts.every(font => font.isCustomFont && font.familyName.startsWith(family))).toBe(true);
+  }
+  await cdp.detach();
+  for (const logo of await positions.locator('img').all()) {
+    await expect(logo).toHaveCSS('width', '14px');
+    await expect(logo).toHaveCSS('height', '14px');
+  }
   const platforms = ['email.svg', 'linkedin.ico', 'github.svg', 'orcid.svg', 'drive.ico'];
   for (const [index, anchor] of (await contacts.locator('a').all()).entries()) {
     await expect(anchor.locator('img')).toHaveAttribute('src', `./assets/platform-icons/${platforms[index]}`);

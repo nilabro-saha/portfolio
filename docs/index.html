@@ -9,11 +9,12 @@
    Nilabro Saha — Engineering &amp; Robotics
   </title>
   <link href="./favicon.svg" rel="icon" type="image/svg+xml"/>
-  <link as="font" crossorigin="" href="./assets/fonts/InterVariable.woff2" rel="preload" type="font/woff2"/>
+  <link as="font" crossorigin="" href="./assets/fonts/Exo2Variable-Latin.woff2" rel="preload" type="font/woff2"/>
+  <link as="font" crossorigin="" href="./assets/fonts/PlayfairDisplayVariable-Latin.woff2" rel="preload" type="font/woff2"/>
   <link href="./css/tokens.css" rel="stylesheet"/>
-  <link href="./css/base.css" rel="stylesheet"/>
-  <link href="./css/layout.css" rel="stylesheet"/>
-  <link href="./css/components.css" rel="stylesheet"/>
+  <link href="./css/base.css?v=playfair-sections-5" rel="stylesheet"/>
+  <link href="./css/layout.css?v=playfair-sections-5" rel="stylesheet"/>
+  <link href="./css/components.css?v=playfair-sections-5" rel="stylesheet"/>
   <script src="./js/main.mjs" type="module">
   </script>
  </head>
@@ -68,7 +69,7 @@
     <div class="hero-actions">
      <a class="button primary" href="#academic-work">
       Explore academic work
-      <span aria-hidden="true">
+      <span aria-hidden="true" class="directional-arrow">
        ↘
       </span>
      </a>
@@ -110,15 +111,11 @@
       </a>
      </div>
     </div>
-    <p class="education-meta">
-     B.Tech., Mechanical Engineering — NIT Durgapur
-     <span aria-hidden="true">
-      ·
-     </span>
-     Georgia Tech online M.S. in Computer Science — in progress
-     <br/>
-     Computational Perception and Robotics specialization
-    </p>
+    <ul class="hero-positions" aria-label="Education and current role">
+     <li><img class="position-logo" src="./assets/education/georgia-tech-compact.ico" width="14" height="14" alt="" aria-hidden="true" decoding="async"/><span>Master of Science in Computer Science (Online) — Georgia Tech</span></li>
+     <li><img class="position-logo" src="./assets/platform-icons/oracle.png" width="14" height="14" alt="" aria-hidden="true" decoding="async"/><span>Senior Application Developer IC3 — Oracle</span></li>
+     <li><img class="position-logo" src="./assets/education/nit-durgapur.png" width="14" height="14" alt="" aria-hidden="true" decoding="async"/><span>Bachelor of Technology in Mechanical Engineering — NIT Durgapur</span></li>
+    </ul>
    </div>
    <section aria-labelledby="highlights-title" class="page-section" id="highlights">
     <div class="section-shell">

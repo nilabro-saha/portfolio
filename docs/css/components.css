@@ -26,6 +26,7 @@
 .media-links { display: flex; flex-wrap: wrap; gap: 4px 18px; margin-top: auto; padding-top: 20px; }
 .platform-link { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; max-width: 100%; padding: 0; color: var(--vermilion-dark); font-size: .78rem; font-weight: 600; line-height: 1.4; text-decoration: none; text-underline-offset: 4px; white-space: nowrap; }
 .platform-link:hover { text-decoration: underline; }
+.external-arrow, .directional-arrow { font-family: Inter, Helvetica, Arial, sans-serif; }
 .external-arrow { margin-left: -4px; font-weight: 500; }
 .platform-icon { display: block; flex: 0 0 18px; width: 18px; height: 18px; object-fit: contain; }
 .platform-icon[src$="/zenodo.png"] { padding: 2px; border-radius: 2px; background: #245a7e; }
