@@ -14,7 +14,7 @@ export async function configureLinks() {
   const anchors = [...document.querySelectorAll('[data-link-key]')];
   let config;
   try {
-    const response = await fetch(new URL('../config.json', import.meta.url));
+    const response = await fetch(new URL('../config.json', import.meta.url), { cache: 'no-store' });
     if (!response.ok) throw new Error(`Configuration request failed: ${response.status}`);
     config = await response.json();
     if (!config || Array.isArray(config) || typeof config !== 'object') throw new Error('Link configuration must be an object');
@@ -36,6 +36,7 @@ export async function configureLinks() {
       anchor.hidden = true;
       continue;
     }
+    anchor.hidden = false;
     anchor.href = href;
     if (href.startsWith('https:')) {
       anchor.target = '_blank';

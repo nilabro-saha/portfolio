@@ -2,12 +2,17 @@
   "exoskeleton-thesis": "https://doi.org/10.5281/zenodo.22812016",
   "seminar-wearable-technology": "https://doi.org/10.5281/zenodo.22843036",
   "seminar-compliant-mechanisms": "https://doi.org/10.5281/zenodo.22843178",
-  "mechanalyzer-demo": "https://youtu.be/GLIL7M9gD0A",
+  "mechanalyzer-demo": "https://youtu.be/-LSQcEB2ASo",
   "gear-meshing-paper": "https://doi.org/10.1007/978-981-19-3716-3_51",
   "gear-meshing-presentation": "https://youtu.be/fwrT8IEonCg",
   "kinematics-paper": "https://doi.org/10.1007/978-3-030-91892-7_5",
   "contact-email": "mailto:nilabrosaha2001@gmail.com",
   "contact-linkedin": "https://www.linkedin.com/in/nilabro-saha/",
   "contact-orcid": "https://orcid.org/0000-0003-1795-2529",
-  "full-cv": null
+  "full-cv": "https://drive.google.com/file/d/1WKK1BT2Yicp4fLi1GTT58tTPq6wHXBvZ/view?usp=sharing",
+  "sih-submission": "https://youtu.be/GLIL7M9gD0A",
+  "exoskeleton-code": "https://github.com/nilabro-saha/hand-exoskeleton",
+  "parallel-kinematic-code": "https://github.com/nilabro-saha/parallel-kinematic-cosimulation",
+  "opjems-proposals": "https://zenodo.org/search?q=NilsahaOPJEMSProposal&l=list&p=1&s=10&sort=bestmatch",
+  "contact-github": "https://github.com/nilabro-saha"
 }

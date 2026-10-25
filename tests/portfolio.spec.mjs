@@ -1,106 +1,430 @@
 import { test, expect } from '@playwright/test';
 
-test('ships themed sections, source previews, and configured external links', async ({ page }) => {
+const sectionCounts = {
+  highlights: 3,
+  'academic-work': 5,
+  publications: 2,
+  background: 2,
+  'academic-achievements': 6,
+  'professional-achievements': 3,
+};
+
+async function loadPreviews(page) {
+  await page.locator('img').evaluateAll(images => Promise.all(images.map(image => {
+    image.loading = 'eager';
+    return image.decode();
+  })));
+}
+
+test('preserves all content, evidence previews, and configured destinations', async ({ page }) => {
   const failed = [];
+  const errors = [];
   page.on('requestfailed', request => failed.push(request.url()));
+  page.on('response', response => { if (response.status() >= 400) failed.push(response.url()); });
+  page.on('pageerror', error => errors.push(error.message));
   await page.goto('/');
   await expect(page).toHaveTitle(/Nilabro Saha/);
-  await expect(page.locator('#academic-work .visual-card')).toHaveCount(5);
-  await expect(page.locator('#publications .publication-card')).toHaveCount(2);
+  await expect(page.locator('h1')).toHaveText('Hello, I’m Nilabro.');
+  for (const [section, count] of Object.entries(sectionCounts)) {
+    await expect(page.locator(`#${section} .project-card`)).toHaveCount(count);
+  }
+  await expect(page.locator('#highlights h3')).toHaveText([
+    'Research and mechanisms.', 'Academic trajectory and leadership.', 'Systems and performance.',
+  ]);
+  await expect(page.locator('#highlights li')).toHaveCount(13);
+  await expect(page.locator('.carousel, .section-rail, [data-carousel]')).toHaveCount(0);
   await expect(page.locator('#academic-work img[src*="seminar-"]')).toHaveCount(2);
   await expect(page.locator('[data-link-key="seminar-wearable-technology"]')).toHaveAttribute('href', 'https://doi.org/10.5281/zenodo.22843036');
   await expect(page.locator('[data-link-key="seminar-compliant-mechanisms"]')).toHaveAttribute('href', 'https://doi.org/10.5281/zenodo.22843178');
-  expect(await page.locator('img').evaluateAll(images => images.every(image => image.complete && image.naturalWidth > 0))).toBe(true);
+  await loadPreviews(page);
+  for (const link of await page.locator('.preview-link').all()) {
+    await expect(link).toHaveAttribute('href', await link.locator('img').getAttribute('src'));
+    await expect(link).toHaveAttribute('target', '_blank');
+    await expect(link).toHaveAccessibleName(/View full-size preview/);
+  }
+  await expect(page.locator('.preview-link')).toHaveCount(16);
   expect(failed).toEqual([]);
+  expect(errors).toEqual([]);
 });
 
-test('carousel progress train and controls track the active slide', async ({ page }) => {
-  await page.goto('/');
-  const carousel = page.locator('#highlights .carousel');
-  await expect(carousel.locator('.carousel-bubble')).toHaveCount(3);
-  await expect(carousel.locator('.carousel-bubble.is-active')).toHaveCount(1);
-  await carousel.locator('.next').click();
-  await expect(carousel.locator('.carousel-progress')).toContainText('Slide 2 of 3');
-  await carousel.locator('.carousel-track').focus();
-  await page.keyboard.press('ArrowRight');
-  await expect(carousel.locator('.carousel-progress')).toContainText('Slide 3 of 3');
-  await expect(carousel.locator('.next')).toBeDisabled();
-});
-
-test('active section updates the transparent header theme', async ({ page }) => {
-  await page.goto('/');
-  await expect(page.locator('html')).toHaveAttribute('data-active-theme', 'vermilion');
-  await page.locator('.site-nav a[href="#academic-work"]').click();
-  await expect(page.locator('html')).toHaveAttribute('data-active-theme', 'ivory');
-  await page.locator('.site-nav a[href="#contact"]').click();
-  await expect(page.locator('html')).toHaveAttribute('data-active-theme', 'neutral');
-});
-
-test('desktop cards are centred with visible adjacent slides and separators', async ({ browser }) => {
-  const context = await browser.newContext({ viewport: { width: 1600, height: 1040 } });
-  const page = await context.newPage();
-  await page.goto('/');
-  const carousel = page.locator('#academic-work .carousel');
-  const geometry = await carousel.locator('.carousel-track').evaluate(track => {
-    const card = track.querySelector('.slide').getBoundingClientRect();
-    const bounds = track.getBoundingClientRect();
-    const separator = getComputedStyle(track.querySelector('.slide'), '::after');
-    return { cardCenter: card.left + card.width / 2, trackCenter: bounds.left + bounds.width / 2, separatorWidth: separator.width };
-  });
-  expect(Math.abs(geometry.cardCenter - geometry.trackCenter)).toBeLessThanOrEqual(2);
-  expect(geometry.separatorWidth).toBe('1px');
-  await context.close();
-});
-
-test('small screens place arrows beside a centred card and use an in-flow menu', async ({ browser }) => {
-  const context = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true });
-  const page = await context.newPage();
-  await page.goto('/');
-  const toggle = page.locator('.menu-toggle');
-  await expect(toggle).toBeVisible();
-  const before = await page.locator('#highlights').evaluate(section => section.getBoundingClientRect().top);
-  await toggle.click();
-  await expect(toggle).toHaveAttribute('aria-expanded', 'true');
-  const after = await page.locator('#highlights').evaluate(section => section.getBoundingClientRect().top);
-  expect(after).toBeGreaterThan(before);
-  await page.keyboard.press('Escape');
-  await expect(toggle).toHaveAttribute('aria-expanded', 'false');
-  await toggle.click();
-  await page.locator('.site-nav a[href="#academic-work"]').click();
-  const positions = await page.locator('#academic-work .carousel').evaluate(carousel => {
-    const card = carousel.querySelector('.slide').getBoundingClientRect();
-    const previous = carousel.querySelector('.prev').getBoundingClientRect();
-    const next = carousel.querySelector('.next').getBoundingClientRect();
-    return { cardCenter: card.left + card.width / 2, viewportCenter: innerWidth / 2, previousRight: previous.right, cardLeft: card.left, nextLeft: next.left, cardRight: card.right };
-  });
-  expect(Math.abs(positions.cardCenter - positions.viewportCenter)).toBeLessThanOrEqual(4);
-  expect(positions.previousRight).toBeLessThanOrEqual(positions.cardLeft);
-  expect(positions.nextLeft).toBeGreaterThanOrEqual(positions.cardRight);
-  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
-  await context.close();
-});
-
-test('page-wide direction keys and no-JavaScript navigation remain available', async ({ browser }) => {
-  const page = await browser.newPage();
-  await page.goto('/');
-  await page.locator('.site-nav a[href="#academic-work"]').click();
-  await page.waitForTimeout(500);
-  await page.keyboard.press('ArrowRight');
-  await expect(page.locator('#academic-work .carousel-progress')).toContainText('Slide 2 of 5');
-  await page.keyboard.press('ArrowDown');
-  await expect(page.locator('.section-rail [data-section-current]')).toHaveText('03');
-  await page.close();
-
-  const noJs = await browser.newContext({ javaScriptEnabled: false });
-  const noJsPage = await noJs.newPage();
-  await noJsPage.goto('/');
-  await expect(noJsPage.locator('.site-nav a[href="#academic-work"]')).toBeVisible();
-  await noJs.close();
-});
-
-test('reduced motion removes animated movement', async ({ page }) => {
+test('native section links update hashes and support direct loading and browser history', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/');
-  const duration = await page.locator('#academic-work .visual-card').first().evaluate(card => getComputedStyle(card).transitionDuration);
-  expect(duration).toContain('1e-05s');
+  for (const link of await page.locator('.site-nav a').all()) {
+    const href = await link.getAttribute('href');
+    await link.click();
+    await expect(page).toHaveURL(new RegExp(`${href}$`));
+    await expect(page.locator(href)).toBeInViewport();
+  }
+  await page.goBack();
+  await expect(page).toHaveURL(/#academic-achievements$/);
+  await page.goto('/#publications');
+  await expect(page.locator('#publications h2')).toBeInViewport();
+  await page.locator('.site-footer a').click();
+  await expect(page).toHaveURL(/#top$/);
+  await expect(page.locator('.site-header')).toBeInViewport();
+});
+
+for (const width of [390, 768, 1024, 1440]) {
+  test(`responsive page and readable previews at ${width}px`, async ({ page }, testInfo) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('/');
+    await loadPreviews(page);
+    const expectedColumns = width <= 700 ? 1 : width <= 1000 ? 2 : 3;
+    for (const [section, count] of Object.entries(sectionCounts)) {
+      const grid = page.locator(`#${section} .card-grid`);
+      const columns = await grid.evaluate(element => getComputedStyle(element).gridTemplateColumns.split(' ').length);
+      expect(columns).toBe(['publications', 'background'].includes(section) ? Math.min(2, expectedColumns) : expectedColumns);
+      const bounds = await grid.locator('.project-card').evaluateAll(cards => cards.map(card => {
+        const box = card.getBoundingClientRect();
+        return { left: box.left, right: box.right, clipped: card.scrollWidth > card.clientWidth + 1 };
+      }));
+      expect(bounds).toHaveLength(count);
+      for (const box of bounds) {
+        expect(box.left).toBeGreaterThanOrEqual(0);
+        expect(box.right).toBeLessThanOrEqual(width);
+        expect(box.clipped).toBe(false);
+      }
+    }
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
+    for (const image of await page.locator('.card-media img').all()) {
+      await expect(image).toHaveCSS('object-fit', 'contain');
+    }
+    for (const [selector, expectedWidth, expectedHeight] of [
+      ['.exoskeleton-preview', 1040, 780], ['.parallel-stage-preview', 637, 430],
+    ]) {
+      const framing = await page.locator(selector).evaluate(figure => {
+        const window = figure.querySelector('.repository-crop').getBoundingClientRect();
+        const image = figure.querySelector('img');
+        const bounds = image.getBoundingClientRect();
+        const preview = figure.querySelector('.preview-link').getBoundingClientRect();
+        const scale = bounds.width / image.naturalWidth;
+        return {
+          x: (window.left - bounds.left) / scale,
+          y: (window.top - bounds.top) / scale,
+          width: window.width / scale,
+          height: window.height / scale,
+          scaleDifference: Math.abs(scale - bounds.height / image.naturalHeight),
+          inside: window.left >= preview.left + 13 && window.right <= preview.right - 13
+            && window.top >= preview.top + 13 && window.bottom <= preview.bottom - 13,
+          displayedWidth: window.width,
+        };
+      });
+      expect(framing.x).toBeCloseTo(36, 0);
+      expect(framing.y).toBeCloseTo(36, 0);
+      expect(framing.width).toBeCloseTo(expectedWidth, 0);
+      expect(framing.height).toBeCloseTo(expectedHeight, 0);
+      expect(framing.scaleDifference).toBeLessThan(.0001);
+      expect(framing.inside).toBe(true);
+      expect(framing.displayedWidth).toBeGreaterThan(100);
+    }
+    for (const link of await page.locator('.platform-link').all()) {
+      const box = await link.boundingBox();
+      expect(box.height).toBeGreaterThanOrEqual(44);
+      expect(box.x).toBeGreaterThanOrEqual(0);
+      expect(box.x + box.width).toBeLessThanOrEqual(width);
+      const icon = await link.locator('.platform-icon').boundingBox();
+      const label = await link.locator('.link-label').boundingBox();
+      expect(icon.x + icon.width).toBeLessThan(label.x);
+    }
+    if (width >= 768) {
+      const primary = await page.locator('.hero-actions > .button').boundingBox();
+      for (const contact of await page.locator('.hero-actions #contact a').all()) {
+        const box = await contact.boundingBox();
+        expect(Math.abs(box.y + box.height / 2 - primary.y - primary.height / 2)).toBeLessThan(2);
+      }
+    }
+    const badge = await page.locator('.award-badge').boundingBox();
+    expect(badge.width).toBe(90);
+    expect(badge.height).toBe(120);
+    await page.screenshot({ path: testInfo.outputPath(`portfolio-${width}.png`), fullPage: true });
+    await page.screenshot({ path: testInfo.outputPath(`intro-${width}.png`) });
+    await page.locator('#background').screenshot({ path: testInfo.outputPath(`background-${width}.png`) });
+    await page.locator('#highlights').screenshot({ path: testInfo.outputPath(`highlights-${width}.png`) });
+    await page.locator('#academic-work').screenshot({ path: testInfo.outputPath(`research-${width}.png`) });
+  });
+}
+
+test('mobile menu expands in flow, closes on Escape and navigation, and restores native scrolling', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/');
+  const toggle = page.locator('.menu-toggle');
+  const intro = page.locator('.hero');
+  const before = await intro.boundingBox();
+  await toggle.click();
+  await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+  expect((await intro.boundingBox()).y).toBeGreaterThan(before.y);
+  await page.keyboard.press('Escape');
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  await expect(page.locator('.site-nav')).toBeHidden();
+  await toggle.click();
+  await page.locator('.site-nav a[href="#academic-work"]').click();
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  await expect(page).toHaveURL(/#academic-work$/);
+  await expect(page.locator('#academic-work h2')).toBeInViewport();
+  const previousY = await page.evaluate(() => scrollY);
+  await page.keyboard.press('ArrowDown');
+  await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(previousY);
+  await expect(page).toHaveURL(/#academic-work$/);
+});
+
+test('without JavaScript all content and native navigation remain available', async ({ browser }) => {
+  const context = await browser.newContext({ javaScriptEnabled: false, reducedMotion: 'reduce', viewport: { width: 390, height: 844 } });
+  const page = await context.newPage();
+  await page.goto('/');
+  await expect(page.locator('.site-nav a[href="#academic-work"]')).toBeVisible();
+  await expect(page.locator('.menu-toggle')).toBeHidden();
+  await page.locator('.site-nav a[href="#academic-work"]').click();
+  await expect(page).toHaveURL(/#academic-work$/);
+  await expect(page.locator('#academic-work h2')).toBeInViewport();
+  await expect(page.locator('.project-card')).toHaveCount(21);
+  await expect(page.locator('#background .education-card')).toHaveCount(2);
+  await page.locator('.site-nav a[href="#background"]').click();
+  await expect(page).toHaveURL(/#background$/);
+  await expect(page.locator('#background h2')).toBeInViewport();
+  await context.close();
+});
+
+test('missing or unsafe configured links stay hidden while valid links remain usable', async ({ page }) => {
+  await page.route('**/config.json', route => route.fulfill({ json: {
+    'exoskeleton-thesis': 'javascript:alert(1)',
+    'gear-meshing-paper': null,
+    'contact-email': 'mailto:nilabrosaha2001@gmail.com',
+  } }));
+  await page.goto('/');
+  await expect(page.locator('[data-link-key="exoskeleton-thesis"]')).toBeHidden();
+  await expect(page.locator('[data-link-key="gear-meshing-paper"]')).toBeHidden();
+  await expect(page.locator('[data-link-key="mechanalyzer-demo"]')).toBeHidden();
+  await expect(page.locator('[data-link-key="exoskeleton-code"]')).toBeHidden();
+  await expect(page.locator('[data-link-key="full-cv"]')).toHaveCount(1);
+  for (const link of await page.locator('[data-link-key="full-cv"]').all()) {
+    await expect(link).toBeHidden();
+  }
+  await expect(page.locator('[data-link-key="contact-email"]')).toHaveAttribute('href', 'mailto:nilabrosaha2001@gmail.com');
+});
+
+test('keyboard skip link and reduced-motion preferences remain usable', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/');
+  await page.keyboard.press('Tab');
+  await expect(page.locator('.skip-link')).toBeFocused();
+  await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(/#main$/);
+  await expect(page.locator('html')).toHaveCSS('scroll-behavior', 'auto');
+  await expect(page.locator('.button').first()).toHaveCSS('transition-duration', '0s');
+});
+
+test('corrected videos, research repositories, proposals, and CV actions use their intended destinations', async ({ page }) => {
+  await page.goto('/');
+  const links = {
+    'mechanalyzer-demo': 'https://youtu.be/-LSQcEB2ASo',
+    'sih-submission': 'https://youtu.be/GLIL7M9gD0A',
+    'gear-meshing-presentation': 'https://youtu.be/fwrT8IEonCg',
+    'exoskeleton-code': 'https://github.com/nilabro-saha/hand-exoskeleton',
+    'parallel-kinematic-code': 'https://github.com/nilabro-saha/parallel-kinematic-cosimulation',
+    'opjems-proposals': 'https://zenodo.org/search?q=NilsahaOPJEMSProposal&l=list&p=1&s=10&sort=bestmatch',
+    'full-cv': 'https://drive.google.com/file/d/1WKK1BT2Yicp4fLi1GTT58tTPq6wHXBvZ/view?usp=sharing',
+    'contact-github': 'https://github.com/nilabro-saha',
+  };
+  for (const [key, url] of Object.entries(links)) {
+    const anchors = page.locator(`[data-link-key="${key}"]`);
+    await expect(anchors).toHaveCount(key === 'opjems-proposals' ? 2 : 1);
+    for (const anchor of await anchors.all()) {
+      await expect(anchor).toHaveAttribute('href', url);
+      await expect(anchor).toHaveAttribute('target', '_blank');
+      await expect(anchor).toHaveAttribute('rel', 'noopener noreferrer');
+    }
+  }
+  await expect(page.locator('#academic-work [data-link-key="mechanalyzer-demo"]')).toHaveAccessibleName('YouTube Presentation');
+  await expect(page.locator('#academic-achievements [data-link-key="sih-submission"]')).toHaveAccessibleName('YouTube Presentation');
+  await expect(page.locator('.contact-links [data-link-key="full-cv"]')).toHaveAccessibleName('View CV');
+});
+
+test('CV additions preserve academic status, research limits, and compact professional experience', async ({ page }) => {
+  await page.goto('/');
+  const background = page.locator('#background');
+  const graduate = background.locator('[aria-label="Georgia Tech graduate education"]');
+  await expect(graduate).toContainText('August 2026–present · In progress');
+  await expect(graduate).toContainText('CS 7638: Robotics: AI Techniques — in progress');
+  await expect(graduate).toContainText('Bayesian filters, search, PID control, and SLAM');
+  const undergraduate = background.locator('[aria-label="NIT Durgapur undergraduate education"]');
+  await expect(undergraduate).toContainText('June 2018–May 2022');
+  await expect(undergraduate).toContainText('9.31/10');
+  await expect(undergraduate).toContainText('2nd out of 149');
+  await expect(undergraduate).toContainText('AMM India');
+  await expect(background.locator('h2')).toHaveText('Education');
+  await expect(page.locator('.skills-grid, [aria-label="Technical skills"]')).toHaveCount(0);
+  await expect(page.locator('#publications .publication-dates')).toHaveText([
+    'Published: 2023 · First online: 2022', 'Published: 2022 · First online: 2021',
+  ]);
+  const exoskeleton = page.locator('[aria-label="Underactuated hand exoskeleton"]');
+  await expect(exoskeleton).toContainText('modeled MCP range to approximately 110°');
+  await expect(exoskeleton).toContainText('interference near 60°');
+  await expect(exoskeleton).toContainText('45° finger-PIP and 50° thumb flexion targets');
+  await expect(exoskeleton).toContainText('Shibendu Shekhar Roy');
+  await expect(exoskeleton).toContainText('Abhijit Mahapatra');
+  const parallel = page.locator('[aria-label="Parallel-kinematic system modelling"]');
+  await expect(parallel).toContainText('four-state cart-pendulum benchmark');
+  await expect(parallel).toContainText('measuring-stage controller remained future work');
+  await expect(parallel).toContainText('Dr. N. C. Murmu');
+  const software = page.locator('[aria-label="Systems and performance"]');
+  await expect(software.locator('.role-progression')).toContainText('Senior Application Solution Developer, October 2025–present');
+  await expect(software.locator('li')).toHaveCount(5);
+  for (const metric of ['9.5×', '110M+ events/day', '75%+', '97%', '23k+', '99%', '25+', '100k+ row', '63%']) {
+    await expect(software).toContainText(metric);
+  }
+  await expect(page.locator('#highlights')).toContainText('May 2021–May 2022');
+  await expect(page.locator('.additional-certifications')).toContainText('OCI Generative AI · OCI DevOps');
+  await expect(page.locator('main')).not.toContainText('GRE');
+  await expect(page.locator('main')).not.toContainText('TOEFL');
+  await expect(page.locator('main')).not.toContainText('Outstanding');
+});
+
+test('platform links use uniform labels and decorative local icons on the right cards', async ({ page }, testInfo) => {
+  await page.goto('/');
+  const platforms = {
+    'mechanalyzer-demo': ['YouTube Presentation', 'youtube.ico'],
+    'sih-submission': ['YouTube Presentation', 'youtube.ico'],
+    'gear-meshing-presentation': ['YouTube Presentation', 'youtube.ico'],
+    'exoskeleton-code': ['Code', 'github.svg'],
+    'parallel-kinematic-code': ['Code', 'github.svg'],
+    'exoskeleton-thesis': ['Zenodo Article', 'zenodo.png'],
+    'seminar-wearable-technology': ['Zenodo Article', 'zenodo.png'],
+    'seminar-compliant-mechanisms': ['Zenodo Article', 'zenodo.png'],
+    'gear-meshing-paper': ['View Paper', 'springer.ico'],
+    'kinematics-paper': ['View Paper', 'springer.ico'],
+    'opjems-proposals': ['Browse Proposals', 'zenodo.png'],
+  };
+  for (const [key, [label, icon]] of Object.entries(platforms)) {
+    for (const anchor of await page.locator(`[data-link-key="${key}"]`).all()) {
+      await expect(anchor).toHaveAccessibleName(label);
+      await expect(anchor.locator('img')).toHaveAttribute('src', `./assets/platform-icons/${icon}`);
+      await expect(anchor.locator('img')).toHaveAttribute('alt', '');
+      await expect(anchor.locator('img')).toHaveAttribute('aria-hidden', 'true');
+      await expect(anchor.locator('.external-arrow')).toHaveText('↗');
+      await expect(anchor.locator('.external-arrow')).toHaveAttribute('aria-hidden', 'true');
+    }
+  }
+  await expect(page.locator('[aria-label="Underactuated hand exoskeleton"] [data-link-key="exoskeleton-code"]')).toBeVisible();
+  await expect(page.locator('[aria-label="Parallel-kinematic system modelling"] [data-link-key="parallel-kinematic-code"]')).toBeVisible();
+  await expect(page.locator('.platform-link')).toHaveCount(17);
+  await loadPreviews(page);
+  await page.locator('#academic-work').screenshot({ path: testInfo.outputPath('academic-code-links.png') });
+});
+
+test('contacts appear once in the introduction and the old contact anchor remains usable', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/');
+  const contacts = page.locator('.hero #contact');
+  await expect(contacts.locator('a')).toHaveText(['Email ↗', 'LinkedIn ↗', 'GitHub ↗', 'ORCID ↗', 'View CV ↗']);
+  const platforms = ['email.svg', 'linkedin.ico', 'github.svg', 'orcid.svg', 'drive.ico'];
+  for (const [index, anchor] of (await contacts.locator('a').all()).entries()) {
+    await expect(anchor.locator('img')).toHaveAttribute('src', `./assets/platform-icons/${platforms[index]}`);
+  }
+  await expect(page.locator('section#contact, .contact-section')).toHaveCount(0);
+  await expect(page.locator('.site-nav a[href="#contact"], .hero-actions a[href="#contact"]')).toHaveCount(0);
+  await expect(page.locator('.hero-actions > .button')).toHaveAccessibleName('Explore academic work');
+  await page.goto('/#contact');
+  await expect(contacts).toBeInViewport();
+});
+
+test('award preview uses the supplied native-size badge and no email-excerpt language', async ({ page }) => {
+  await page.goto('/');
+  const award = page.locator('[aria-label="Oracle Rock Stars Gold Award"]');
+  const image = award.locator('.award-badge');
+  await image.scrollIntoViewIfNeeded();
+  await expect(image).toHaveAttribute('src', './assets/previews/oracle-rock-stars-badge.png');
+  await expect(award.locator('.preview-link')).toHaveAttribute('href', './assets/previews/oracle-rock-stars-badge.png');
+  await expect(image).toHaveAttribute('alt', /Gold Award badge, September 2024/);
+  await expect.poll(() => image.evaluate(element => [element.naturalWidth, element.naturalHeight])).toEqual([90, 120]);
+  await expect(award.locator('.media-caption')).toHaveText('Rock Stars Gold Award badge');
+  await expect(award.locator('.card-detail')).toHaveText('Awarded September 2024');
+  await expect(award).not.toContainText(/email|excerpt/i);
+});
+
+test('fresh link configuration overrides an older browser-cached copy', async ({ page }) => {
+  const { createServer } = await import('node:http');
+  const { readFile } = await import('node:fs/promises');
+  const docs = new URL('../docs/', import.meta.url);
+  const current = JSON.parse(await readFile(new URL('config.json', docs), 'utf8'));
+  const stale = { ...current, 'full-cv': null, 'mechanalyzer-demo': 'https://youtu.be/GLIL7M9gD0A' };
+  delete stale['exoskeleton-code'];
+  delete stale['parallel-kinematic-code'];
+  let useCurrent = false;
+  let configRequests = 0;
+  const types = { '.html': 'text/html', '.mjs': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.png': 'image/png', '.ico': 'image/x-icon' };
+  const server = createServer(async (request, response) => {
+    const path = new URL(request.url, 'http://localhost').pathname;
+    if (path === '/config.json') {
+      configRequests++;
+      response.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=31536000' });
+      response.end(JSON.stringify(useCurrent ? current : stale));
+      return;
+    }
+    if (path === '/warmup') {
+      response.writeHead(200, { 'Content-Type': 'text/html' });
+      response.end('<!doctype html><title>Cache warmup</title>');
+      return;
+    }
+    try {
+      const file = new URL(path === '/' ? 'index.html' : path.slice(1), docs);
+      if (!file.href.startsWith(docs.href)) throw new Error('Invalid test path');
+      const body = await readFile(file);
+      const extension = file.pathname.slice(file.pathname.lastIndexOf('.'));
+      response.writeHead(200, { 'Content-Type': types[extension] ?? 'application/octet-stream' });
+      response.end(body);
+    } catch {
+      response.writeHead(404);
+      response.end();
+    }
+  });
+  await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+  try {
+    const origin = `http://127.0.0.1:${server.address().port}`;
+    await page.goto(`${origin}/warmup`);
+    // Prime the actual HTTP cache with the outdated response, then change the server's copy.
+    await page.evaluate(() => fetch('/config.json').then(response => response.json()));
+    expect(configRequests).toBe(1);
+    useCurrent = true;
+    const cached = await page.evaluate(() => fetch('/config.json').then(response => response.json()));
+    expect(cached['exoskeleton-code']).toBeUndefined();
+    expect(configRequests).toBe(1);
+    await page.goto(origin);
+    for (const key of ['exoskeleton-code', 'parallel-kinematic-code', 'full-cv']) {
+      const anchor = page.locator(`[data-link-key="${key}"]`);
+      await expect(anchor).toBeVisible();
+      await expect(anchor).toHaveAttribute('href', current[key]);
+    }
+    await expect(page.locator('[data-link-key="mechanalyzer-demo"]')).toHaveAttribute('href', current['mechanalyzer-demo']);
+    expect(configRequests).toBe(2);
+  } finally {
+    await new Promise(resolve => server.close(resolve));
+  }
+});
+
+test('repository images replace only the selected diagrams and open the complete figures', async ({ page }) => {
+  await page.goto('/');
+  await loadPreviews(page);
+  const figures = [
+    ['Underactuated hand exoskeleton', 'exoskeleton-assembly.jpg', 'Hand exoskeleton — frontal CAD view', [2174, 2208]],
+    ['Parallel-kinematic system modelling', 'parallel-stage-load-cases.jpg', 'Parallel stage — initial simulation model', [2019, 1048]],
+  ];
+  for (const [label, file, caption, dimensions] of figures) {
+    const card = page.locator(`article[aria-label="${label}"]`);
+    const figure = card.locator('.repository-preview');
+    await expect(figure.locator('img')).toHaveAttribute('src', `./assets/previews/${file}`);
+    await expect(figure.locator('.preview-link')).toHaveAttribute('href', `./assets/previews/${file}`);
+    await expect(figure.locator('.media-caption')).toHaveText(caption);
+    expect(await figure.locator('img').evaluate(image => [image.naturalWidth, image.naturalHeight])).toEqual(dimensions);
+    await expect(card.getByRole('link', { name: 'Code', exact: true })).toBeVisible();
+    const popupPromise = page.waitForEvent('popup');
+    await figure.locator('.preview-link').click();
+    const popup = await popupPromise;
+    await popup.waitForLoadState();
+    await expect(popup).toHaveURL(new RegExp(`/assets/previews/${file.replace('.', '\\.')}$`));
+    await popup.close();
+  }
+  await expect(page.locator('[aria-label="MechAnalyzer mechanism simulation"] .preview-link img')).toHaveAttribute('src', './assets/illustrations/mechanalyzer.svg');
+  await expect(page.locator('#academic-work .repository-preview')).toHaveCount(2);
 });

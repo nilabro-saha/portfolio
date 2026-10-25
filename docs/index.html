@@ -1,70 +1,901 @@
-<!doctype html>
-<html lang="en" data-active-theme="vermilion">
-  <head>
-    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#e34832"><meta name="description" content="Nilabro Saha: mechanical engineering, mechanism simulation, robotics research, and software systems.">
-    <title>Nilabro Saha — Engineering & Robotics</title><link rel="icon" type="image/svg+xml" href="./favicon.svg">
-    <link rel="preload" href="./assets/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="./css/tokens.css"><link rel="stylesheet" href="./css/base.css"><link rel="stylesheet" href="./css/layout.css"><link rel="stylesheet" href="./css/components.css">
-    <script type="module" src="./js/main.mjs"></script>
-  </head>
-  <body>
-    <a class="skip-link" href="#main">Skip to content</a>
-    <header class="site-header">
-      <div class="identity"><a class="name" href="#top">Nilabro Saha<span class="name-dot">.</span></a><p>Mechanical engineer <span aria-hidden="true">/</span> Robotics & mechanism simulation <span aria-hidden="true">/</span> Software systems</p></div>
-      <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-menu"><svg class="icon icon-menu" aria-hidden="true"><use href="./assets/icons.svg#menu"></use></svg><svg class="icon icon-close" aria-hidden="true"><use href="./assets/icons.svg#x"></use></svg></button>
-      <nav class="site-nav" id="site-menu" aria-label="Page sections">
-        <a href="#highlights">Highlights</a><a href="#academic-work">Academic work</a><a href="#publications">Publications</a><a href="#academic-achievements">Academic achievements</a><a href="#professional-achievements">Professional achievements</a><a href="#contact">Contact</a>
-      </nav>
-    </header>
-    <nav class="section-rail" aria-label="Section navigation"><button type="button" class="section-rail-button" data-section-previous aria-label="Previous section"><svg class="icon" aria-hidden="true"><use href="./assets/icons.svg#chevron-up"></use></svg></button><p class="section-rail-position" aria-live="polite"><span data-section-current>01</span><span aria-hidden="true"> / 06</span><span class="sr-only" data-section-label>Highlights</span></p><button type="button" class="section-rail-button" data-section-next aria-label="Next section"><svg class="icon" aria-hidden="true"><use href="./assets/icons.svg#chevron-down"></use></svg></button></nav>
-    <main id="main"><div id="top" class="top-anchor" aria-hidden="true"></div>
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="#f1f2ef" name="theme-color"/>
+  <meta content="Nilabro Saha: mechanical engineering, mechanism simulation, robotics research, and software systems." name="description"/>
+  <title>
+   Nilabro Saha — Engineering &amp; Robotics
+  </title>
+  <link href="./favicon.svg" rel="icon" type="image/svg+xml"/>
+  <link as="font" crossorigin="" href="./assets/fonts/InterVariable.woff2" rel="preload" type="font/woff2"/>
+  <link href="./css/tokens.css" rel="stylesheet"/>
+  <link href="./css/base.css" rel="stylesheet"/>
+  <link href="./css/layout.css" rel="stylesheet"/>
+  <link href="./css/components.css" rel="stylesheet"/>
+  <script src="./js/main.mjs" type="module">
+  </script>
+ </head>
+ <body id="top">
+  <a class="skip-link" href="#main">
+   Skip to content
+  </a>
+  <header class="site-header">
+   <div class="identity">
+    <a class="name" href="#top">Nilabro Saha.</a>
+   </div>
+   <button aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation" class="menu-toggle" type="button">
+    <svg aria-hidden="true" class="icon icon-menu">
+     <use href="./assets/icons.svg#menu">
+     </use>
+    </svg>
+    <svg aria-hidden="true" class="icon icon-close">
+     <use href="./assets/icons.svg#x">
+     </use>
+    </svg>
+   </button>
+   <nav aria-label="Page sections" class="site-nav" id="site-menu">
+    <a href="#highlights">
+     Highlights
+    </a>
+    <a href="#academic-work">
+     Academic work
+    </a>
+    <a href="#publications">
+     Publications
+    </a>
+    <a href="#background">
+     Education
+    </a>
+    <a href="#academic-achievements">
+     Academic achievements
+    </a>
+    <a href="#professional-achievements">
+     Professional achievements
+    </a>
+   </nav>
+  </header>
+  <main id="main">
+   <div aria-labelledby="intro-title" class="hero">
+    <p class="eyebrow">
+     Nilabro’s portfolio
+    </p>
+    <h1 id="intro-title">Hello, I’m Nilabro<span class="heading-period">.</span></h1>
+    <p class="lede">
+     I’m a mechanical engineer working across mechanism simulation, robotics, and software systems. My research spans wearable mechanisms, interactive kinematics education, and parallel-kinematic modelling.
+    </p>
+    <div class="hero-actions">
+     <a class="button primary" href="#academic-work">
+      Explore academic work
+      <span aria-hidden="true">
+       ↘
+      </span>
+     </a>
+     <div aria-label="Contact and profiles" class="contact-links" id="contact" role="group">
+      <a class="platform-link" data-link-key="contact-email">
+       <img alt="" aria-hidden="true" class="platform-icon" decoding="async" height="18" src="./assets/platform-icons/email.svg" width="18"/>
+       <span class="link-label">
+        Email
+       </span>
+       <span aria-hidden="true" class="external-arrow">↗</span>
+      </a>
+      <a class="platform-link" data-link-key="contact-linkedin">
+       <img alt="" aria-hidden="true" class="platform-icon" decoding="async" height="18" src="./assets/platform-icons/linkedin.ico" width="18"/>
+       <span class="link-label">
+        LinkedIn
+       </span>
+       <span aria-hidden="true" class="external-arrow">↗</span>
+      </a>
+      <a class="platform-link" data-link-key="contact-github">
+       <img alt="" aria-hidden="true" class="platform-icon" decoding="async" height="18" src="./assets/platform-icons/github.svg" width="18"/>
+       <span class="link-label">
+        GitHub
+       </span>
+       <span aria-hidden="true" class="external-arrow">↗</span>
+      </a>
+      <a class="platform-link" data-link-key="contact-orcid">
+       <img alt="" aria-hidden="true" class="platform-icon" decoding="async" height="18" src="./assets/platform-icons/orcid.svg" width="18"/>
+       <span class="link-label">
+        ORCID
+       </span>
+       <span aria-hidden="true" class="external-arrow">↗</span>
+      </a>
+      <a class="platform-link" data-link-key="full-cv">
+       <img alt="" aria-hidden="true" class="platform-icon" decoding="async" height="18" src="./assets/platform-icons/drive.ico" width="18"/>
+       <span class="link-label">
+        View CV
+       </span>
+       <span aria-hidden="true" class="external-arrow">↗</span>
+      </a>
+     </div>
+    </div>
+    <p class="education-meta">
+     B.Tech., Mechanical Engineering — NIT Durgapur
+     <span aria-hidden="true">
+      ·
+     </span>
+     Georgia Tech online M.S. in Computer Science — in progress
+     <br/>
+     Computational Perception and Robotics specialization
+    </p>
+   </div>
+   <section aria-labelledby="highlights-title" class="page-section" id="highlights">
+    <div class="section-shell">
+     <div class="section-heading">
+      <p class="section-index">
+       At a glance
+      </p>
+      <div class="heading-row">
+       <h2 id="highlights-title">
+        Highlights
+       </h2>
+       <p class="section-intro">
+        Mechanisms, modelling, and engineering at scale.
+       </p>
+      </div>
+     </div>
+     <div class="card-grid">
+      <article aria-label="Research and mechanisms" class="highlight-slide project-card">
+       <div class="highlight-copy">
+        <span class="kicker">
+         Research
+        </span>
+        <h3>
+         Research and mechanisms.
+        </h3>
+        <ul class="editorial-list">
+         <li>
+          Two first-author conference papers on mechanism simulation and kinematics education.
+         </li>
+         <li>
+          Modelled and optimized an underactuated, six-actuator hand exoskeleton; checked motion and collision limits in MSC Adams.
+         </li>
+         <li>
+          Added 11 interactive 3D mechanisms and two modules to MechAnalyzer.
+         </li>
+         <li>
+          Derived a six-state parallel-kinematic stage model and evaluated four loading cases.
+         </li>
+        </ul>
+       </div>
+      </article>
+      <article aria-label="Academic trajectory and leadership" class="highlight-slide project-card">
+       <div class="highlight-copy">
+        <span class="kicker">
+         Trajectory
+        </span>
+        <h3>
+         Academic trajectory and leadership.
+        </h3>
+        <ul class="editorial-list">
+         <li>
+          B.Tech. in Mechanical Engineering from NIT Durgapur:
+          <strong>9.31/10</strong>, First Class with Distinction, ranked
+          <strong>2nd of 149</strong>.
+         </li>
+         <li>
+          Twice awarded the OP Jindal Engineering and Management Scholarship, in 2019 and 2020.
+         </li>
+         <li>
+          Georgia Tech online M.S. in Computer Science, Computational Perception and Robotics specialization —
+          <strong>in progress</strong>.
+         </li>
+         <li>
+          President, Mechanical Engineering Students’ Association (MESA), May 2021–May 2022; organized technical seminars and academic/industry engagement activities.
+         </li>
+        </ul>
+       </div>
+      </article>
+      <article aria-label="Systems and performance" class="highlight-slide project-card">
+       <div class="highlight-copy">
+        <span class="kicker">
+         Software
+        </span>
+        <h3>
+         Systems and performance.
+        </h3>
+        <p class="role-progression">
+         Oracle · Applications Engineer, July 2022–October 2025; Senior Application Solution Developer, October 2025–present.
+        </p>
+        <ul class="editorial-list">
+         <li>
+          Increased GoldenGate-to-Kafka ingestion
+          <strong>9.5×</strong>; supported
+          <strong>110M+ events/day</strong>
+          while reducing data volume by
+          <strong>75%+</strong>.
+         </li>
+         <li>
+          Cut REST API P95 latency by
+          <strong>97%</strong>
+          through profiling and connection-pool tuning.
+         </li>
+         <li>
+          Delivered compensation insights to
+          <strong>23k+</strong>
+          sales representatives with sub-six-hour data lag and
+          <strong>99%</strong>
+          reliability across four Spring Boot microservices.
+         </li>
+         <li>
+          Built
+          <strong>25+</strong>
+          AI agent workflows, reducing plan creation from hours to under ten minutes.
+         </li>
+         <li>
+          Stabilized
+          <strong>100k+ row</strong>
+          aggregation jobs through pagination; batched fetches cut queue drain time by
+          <strong>63%</strong>.
+         </li>
+        </ul>
+       </div>
+      </article>
+     </div>
+    </div>
+   </section>
+   <section aria-labelledby="academic-work-title" class="page-section" id="academic-work">
+    <div class="section-shell">
+     <div class="section-heading">
+      <p class="section-index">
+       Research &amp; development
+      </p>
+      <div class="heading-row">
+       <h2 id="academic-work-title">
+        Academic work
+       </h2>
+       <p class="section-intro">
+        Five projects and seminar reviews at the intersection of mechanism theory, simulation, and robotics.
+       </p>
+      </div>
+     </div>
+     <div class="card-grid">
+      <article aria-label="Underactuated hand exoskeleton" class="visual-card project-card">
+       <figure class="card-media repository-preview exoskeleton-preview">
+        <a aria-label="View full-size preview: Underactuated hand exoskeleton" class="preview-link" href="./assets/previews/exoskeleton-assembly.jpg" rel="noopener noreferrer" target="_blank">
+         <span class="repository-crop">
+          <img alt="Frontal CAD view of the linkage-driven hand exoskeleton" decoding="async" height="2208" loading="lazy" src="./assets/previews/exoskeleton-assembly.jpg" width="2174"/>
+         </span>
+        </a>
+        <figcaption class="media-caption">
+         Hand exoskeleton — frontal CAD view
+        </figcaption>
+       </figure>
+       <div class="card-copy">
+        <p class="kicker">
+         CSIR-CMERI / B.Tech. thesis / February–May 2022
+        </p>
+        <h3>
+         Underactuated hand exoskeleton
+        </h3>
+        <p>
+         Analysed a five-digit, six-actuator system for master-slave grasping and force feedback. MATLAB kinematics and linkage optimization extended the modeled MCP range to approximately 110°; MSC Adams identified interference near 60° of index-MCP flexion, limiting the assembly’s usable range.
+        </p>
+        <p class="card-detail">
+         16-link, 3-DOF finger mechanisms · 45° finger-PIP and 50° thumb flexion targets · 23–28 mm actuator travel
+        </p>
+        <p class="project-advisors">
+         Advisors: Prof. Shibendu Shekhar Roy, NIT Durgapur; Dr. Abhijit Mahapatra, CSIR-CMERI.
+        </p>
+        <div class="media-links">
+         <a class="platform-link" data-link-key="exoskeleton-code">
+          <img alt="" aria-hidden="true" class="platform-icon" decoding="async" height="18" src="./assets/platform-icons/github.svg" width="18"/>
+          <span class="link-label">
+           Code
+          </span>
+          <span aria-hidden="true" class="external-arrow">↗</span>
+         </a>
+         <a class="platform-link" data-link-key="exoskeleton-thesis">
+          <img alt="" aria-hidden="true" class="platform-icon" decoding="async" height="18" src="./assets/platform-icons/zenodo.png" width="18"/>
+          <span class="link-label">
+           Zenodo Article
+          </span>
+          <span aria-hidden="true" class="external-arrow">↗</span>
+         </a>
+        </div>
 
-      <section class="page-section theme-vermilion" id="highlights" data-theme="vermilion" aria-labelledby="highlights-title"><div class="section-shell">
-        <div class="section-heading"><p class="section-index">01 / At a glance</p><div class="heading-row"><h1 id="highlights-title">Highlights<span class="heading-period">.</span></h1><p class="section-intro">Mechanisms, modelling, and engineering at scale.</p></div></div>
-        <div class="carousel" data-carousel aria-label="Highlights"><div class="carousel-track" tabindex="0" aria-label="Highlights slides">
-          <article class="slide highlight-slide" aria-label="Research and mechanisms"><div class="highlight-copy"><div class="slide-meta"><span class="kicker">Research / 01</span><span class="slide-number">01—03</span></div><h2><span>Research and</span><span>mechanisms.</span></h2><ul class="editorial-list"><li>Two first-author conference papers on mechanism simulation and kinematics education.</li><li>Modelled and optimized an underactuated, six-actuator hand exoskeleton; validated motion in MSC Adams.</li><li>Added 11 interactive 3D mechanisms and two modules to MechAnalyzer.</li><li>Derived a six-state parallel-kinematic stage model and evaluated four loading cases.</li></ul></div><div class="highlight-mark" aria-hidden="true"><span>R</span><small>mechanisms / simulation</small></div></article>
-          <article class="slide highlight-slide" aria-label="Systems and performance"><div class="highlight-copy"><div class="slide-meta"><span class="kicker">Software / 02</span><span class="slide-number">02—03</span></div><h2><span>Systems and</span><span>performance.</span></h2><ul class="editorial-list"><li>Raised GoldenGate-to-Kafka ingestion throughput <strong>9.5×</strong> and supported a pipeline processing <strong>110M+ events/day</strong>.</li><li>Reduced pipeline data volume by <strong>75%+</strong> and REST API P95 latency by <strong>97%</strong>.</li><li>Delivered compensation insights to <strong>23k+</strong> sales representatives with <strong>99%</strong> data reliability.</li><li>Built <strong>25+</strong> AI agent workflows, reducing plan creation from hours to under ten minutes.</li></ul></div><div class="highlight-mark" aria-hidden="true"><span>S</span><small>systems / impact</small></div></article>
-          <article class="slide highlight-slide" aria-label="Academic trajectory and leadership"><div class="highlight-copy"><div class="slide-meta"><span class="kicker">Trajectory / 03</span><span class="slide-number">03—03</span></div><h2><span>Academic trajectory</span><span>and leadership.</span></h2><ul class="editorial-list"><li>B.Tech. in Mechanical Engineering from NIT Durgapur, with a <strong>9.31/10</strong> GPA and First Class with Distinction.</li><li>Twice awarded the OP Jindal Engineering and Management Scholarship, in 2019 and 2020.</li><li>Georgia Tech online M.S. in Computer Science, Computational Perception and Robotics specialization — <strong>in progress</strong>.</li><li>Former president of NIT Durgapur’s Mechanical Engineering Students’ Association.</li></ul></div><div class="highlight-mark" aria-hidden="true"><span>A</span><small>academics / leadership</small></div></article>
-        </div><div class="carousel-footer"><button type="button" class="carousel-arrow prev" aria-label="Previous highlight"><svg class="icon" aria-hidden="true"><use href="./assets/icons.svg#chevron-left"></use></svg></button><p class="carousel-progress" aria-live="polite"></p><button type="button" class="carousel-arrow next" aria-label="Next highlight"><svg class="icon" aria-hidden="true"><use href="./assets/icons.svg#chevron-right"></use></svg></button></div></div>
-      </div></section>
-
-      <section class="page-section theme-ivory" id="academic-work" data-theme="ivory" aria-labelledby="academic-work-title"><div class="section-shell">
-        <div class="section-heading"><p class="section-index">02 / Research & development</p><div class="heading-row"><h2 id="academic-work-title">Academic work<span class="heading-period">.</span></h2><p class="section-intro">Five projects and seminar reviews at the intersection of mechanism theory, simulation, and robotics.</p></div></div>
-        <div class="carousel" data-carousel aria-label="Academic work"><div class="carousel-track" tabindex="0" aria-label="Academic work cards">
-          <article class="slide visual-card" aria-label="Underactuated hand exoskeleton"><div class="card-copy"><p class="kicker">CSIR-CMERI / B.Tech. thesis / 2022</p><h3><span>Underactuated</span><span>hand exoskeleton</span></h3><p>Analysed a five-digit, six-actuator system for master-slave grasping and force-feedback applications. MATLAB kinematics and MSC Adams simulation guided linkage optimization and exposed an index-finger collision limit.</p><p class="card-detail">16-link, 3-DOF finger mechanisms · 110° MCP flexion</p></div><div class="card-media vector-preview"><img src="./assets/illustrations/exoskeleton.svg" alt="Conceptual diagram of an articulated finger linkage and actuator path" width="960" height="720"><div class="media-links"><a data-link-key="exoskeleton-thesis">Read thesis <span aria-hidden="true">↗</span></a></div><span class="media-caption">Original conceptual schematic</span></div></article>
-          <article class="slide visual-card" aria-label="MechAnalyzer mechanism simulation"><div class="card-copy"><p class="kicker">IIT Delhi Robotics Lab / 2020–22</p><h3><span>Mechanisms,</span><span>made interactive</span></h3><p>Extended MechAnalyzer with 11 interactive 3D models, including gear trains, straight-line mechanisms, and six- and eight-bar linkages. Added modules for involute gear meshing and the history of mechanism theory.</p><p class="card-detail">C# · OpenGL · Coupler curves · Kinematic analysis</p></div><div class="card-media vector-preview"><img src="./assets/illustrations/mechanalyzer.svg" alt="Conceptual diagram of meshing gears, linkage, and coupler curve" width="960" height="720"><div class="media-links"><a data-link-key="mechanalyzer-demo">See demonstration <span aria-hidden="true">↗</span></a></div><span class="media-caption">Original mechanism illustration</span></div></article>
-          <article class="slide visual-card" aria-label="Parallel-kinematic system modelling"><div class="card-copy"><p class="kicker">INAE / CSIR-CMERI / 2021</p><h3><span>Parallel-kinematic</span><span>system modelling</span></h3><p>Derived a six-state model of an ultra-precision coordinate measuring stage and characterised its response under four vertical and lateral load combinations. Separately designed an LQR controller for a cart-pendulum benchmark.</p><p class="card-detail">State-space modelling · MATLAB/Simulink · MSC Adams</p></div><div class="card-media vector-preview"><img src="./assets/illustrations/parallel-stage.svg" alt="Conceptual diagram of a parallel stage with forces and state-space traces" width="960" height="720"><span class="media-caption">Conceptual schematic</span></div></article>
-          <article class="slide visual-card seminar-card" aria-label="Wearable technology seminar"><div class="card-copy"><p class="kicker">Undergraduate seminar / 2021</p><h3><span>Wearable technology:</span><span>hard to soft</span></h3><p>A comparative review of rigid exoskeletons and compliant soft exosuits for rehabilitation and human-performance augmentation.</p><p class="card-detail">NIT Durgapur · September 2021</p></div><div class="card-media document-preview"><img src="./assets/previews/seminar-wearable-technology.webp" alt="Title page of the seminar Evolution of Wearable Technology: Rigid Exoskeletons to Soft Exosuits" width="1600" height="1100"><div class="media-links"><a data-link-key="seminar-wearable-technology">View on Zenodo <span aria-hidden="true">↗</span></a></div><span class="media-caption">Seminar title page</span></div></article>
-          <article class="slide visual-card seminar-card" aria-label="Compliant mechanisms seminar"><div class="card-copy"><p class="kicker">Undergraduate seminar / 2021</p><h3><span>Compliant</span><span>micro-mechanisms</span></h3><p>A review of compliant mechanisms and compliant micro-mechanisms, focused on their design, analysis, and fabrication.</p><p class="card-detail">NIT Durgapur · September 2021</p></div><div class="card-media document-preview"><img src="./assets/previews/seminar-compliant-mechanisms.webp" alt="Title page of the seminar Compliant Mechanisms and Micro-Mechanisms" width="1600" height="1100"><div class="media-links"><a data-link-key="seminar-compliant-mechanisms">View on Zenodo <span aria-hidden="true">↗</span></a></div><span class="media-caption">Seminar title page</span></div></article>
-        </div><div class="carousel-footer"><button type="button" class="carousel-arrow prev" aria-label="Previous academic work"><svg class="icon" aria-hidden="true"><use href="./assets/icons.svg#chevron-left"></use></svg></button><p class="carousel-progress" aria-live="polite"></p><button type="button" class="carousel-arrow next" aria-label="Next academic work"><svg class="icon" aria-hidden="true"><use href="./assets/icons.svg#chevron-right"></use></svg></button></div></div>
-      </div></section>
-
-      <section class="page-section theme-vermilion" id="publications" data-theme="vermilion" aria-labelledby="publications-title"><div class="section-shell">
-        <div class="section-heading"><p class="section-index">03 / Selected publications</p><div class="heading-row"><h2 id="publications-title">Publications<span class="heading-period">.</span></h2><p class="section-intro">First-author conference research on making mechanism behaviour visible.</p></div></div>
-        <div class="carousel" data-carousel aria-label="Publications"><div class="carousel-track" tabindex="0" aria-label="Publication cards">
-          <article class="slide visual-card publication-card" aria-label="Gear meshing visualization paper"><div class="card-copy"><p class="kicker">iNaCoMM / Springer / 2022</p><h3><span>Gear meshing</span><span>visualization</span></h3><p><cite>Gear Meshing Visualization for Effective Education Using MechAnalyzer Software.</cite> A first-author paper on interactive involute gear behaviour as a teaching aid.</p><p class="card-detail">Nilabro Saha · R. G. Chittawadigi · S. K. Saha</p></div><div class="card-media document-preview"><img src="./assets/previews/paper-gear-meshing.webp" alt="First-page title and complete abstract excerpt from the Gear Meshing Visualization paper" width="1224" height="792"><div class="media-links"><a data-link-key="gear-meshing-paper">View paper <span aria-hidden="true">↗</span></a><a data-link-key="gear-meshing-presentation">Presentation <span aria-hidden="true">↗</span></a></div><span class="media-caption">Title and abstract excerpt</span></div></article>
-          <article class="slide visual-card publication-card" aria-label="MechAnalyzer kinematics education paper"><div class="card-copy"><p class="kicker">IFToMM Asian MMS / Springer / 2021</p><h3><span>Teaching kinematics</span><span>through simulation</span></h3><p><cite>MechAnalyzer for Teaching of Kinematics of Linkage Mechanisms Through Simulations and Historical Context.</cite> A first-author paper connecting virtual models with mechanism history.</p><p class="card-detail">Nilabro Saha · R. G. Chittawadigi · S. K. Saha</p></div><div class="card-media document-preview"><img src="./assets/previews/paper-linkage-kinematics.webp" alt="First-page title and complete abstract excerpt from the MechAnalyzer kinematics education paper" width="1224" height="792"><div class="media-links"><a data-link-key="kinematics-paper">View paper <span aria-hidden="true">↗</span></a></div><span class="media-caption">Title and abstract excerpt</span></div></article>
-        </div><div class="carousel-footer"><button type="button" class="carousel-arrow prev" aria-label="Previous publication"><svg class="icon" aria-hidden="true"><use href="./assets/icons.svg#chevron-left"></use></svg></button><p class="carousel-progress" aria-live="polite"></p><button type="button" class="carousel-arrow next" aria-label="Next publication"><svg class="icon" aria-hidden="true"><use href="./assets/icons.svg#chevron-right"></use></svg></button></div></div>
-      </div></section>
-
-      <section class="page-section theme-ivory" id="academic-achievements" data-theme="ivory" aria-labelledby="academic-achievements-title"><div class="section-shell"><div class="section-heading"><p class="section-index">04 / Academic recognition</p><div class="heading-row"><h2 id="academic-achievements-title">Academic achievements<span class="heading-period">.</span></h2><p class="section-intro">A selection of awards, mentoring, and research presentations.</p></div></div><div class="carousel" data-carousel aria-label="Academic achievements"><div class="carousel-track" tabindex="0" aria-label="Academic achievement cards">
-          <article class="slide visual-card evidence-card" aria-label="OPJEMS 2019 scholarship"><div class="card-copy"><p class="kicker">Scholarship / 2019</p><h3><span>OPJEMS</span><span>2019</span></h3><p>Named an OP Jindal Engineering and Management Scholar during the second year of mechanical engineering studies.</p><p class="card-detail">First of two consecutive OPJEMS awards</p></div><div class="card-media"><img src="./assets/previews/opjems-2019.webp" alt="OPJEMS 2019 scholarship certificate bearing Nilabro Saha's name" width="1600" height="1100"><span class="media-caption">Certificate excerpt</span></div></article>
-          <article class="slide visual-card evidence-card" aria-label="OPJEMS 2020 scholarship"><div class="card-copy"><p class="kicker">Scholarship / 2020</p><h3><span>OPJEMS</span><span>2020</span></h3><p>Received the OP Jindal Engineering and Management Scholarship for a second year.</p><p class="card-detail">Two-time recipient / Mechanical Engineering</p></div><div class="card-media"><img src="./assets/previews/opjems-2020.webp" alt="OPJEMS 2020 scholarship certificate bearing Nilabro Saha's name" width="1600" height="1100"><span class="media-caption">Certificate excerpt</span></div></article>
-          <article class="slide visual-card evidence-card" aria-label="INAE engineering student menteeship"><div class="card-copy"><p class="kicker">INAE / 2021</p><h3><span>Engineering student</span><span>mentee</span></h3><p>Selected for mentoring by INAE Fellow Dr. Naresh Chandra Murmu of CSIR-CMERI Durgapur.</p><p class="card-detail">Approval email and named appendix row</p></div><div class="card-media"><img src="./assets/previews/inae-mentee.webp" alt="INAE approval and named appendix excerpts" width="1600" height="1100"><span class="media-caption">Two document excerpts</span></div></article>
-          <article class="slide visual-card evidence-card" aria-label="CSIR-CMERI summer internship"><div class="card-copy"><p class="kicker">Research internship / 2021</p><h3><span>CSIR-CMERI</span><span>summer research</span></h3><p>Completed an internship assignment on co-simulation of a vertical parallel-kinematic structure using ADAMS and MATLAB/Simulink.</p><p class="card-detail">Durgapur / June–July 2021</p></div><div class="card-media"><img src="./assets/previews/cmeri-internship.webp" alt="CSIR-CMERI summer internship certificate" width="1600" height="1100"><span class="media-caption">Certificate excerpt</span></div></article>
-          <article class="slide visual-card evidence-card" aria-label="iNaCoMM paper presentation"><div class="card-copy"><p class="kicker">Conference / 2021</p><h3><span>iNaCoMM paper</span><span>presentation</span></h3><p>Presented work on MechAnalyzer and the teaching of gear meshing at the International and National Conference on Machines and Mechanisms.</p><p class="card-detail">Conference presentation certificate</p></div><div class="card-media"><img src="./assets/previews/inacomm-2021.webp" alt="iNaCoMM 2021 paper presentation certificate" width="1600" height="1100"><span class="media-caption">Certificate excerpt</span></div></article>
-          <article class="slide visual-card evidence-card" aria-label="Smart India Hackathon participation"><div class="card-copy"><p class="kicker">Hardware hackathon / 2020</p><h3><span>Smart India</span><span>Hackathon</span></h3><p>Participated in the 2020 Hardware Edition as a member of Team Gutenberg.</p><p class="card-detail">Team Gutenberg / certificate of participation</p></div><div class="card-media"><img src="./assets/previews/sih-2020.webp" alt="Smart India Hackathon 2020 certificate" width="1600" height="1100"><span class="media-caption">Certificate excerpt</span></div></article>
-        </div><div class="carousel-footer"><button type="button" class="carousel-arrow prev" aria-label="Previous academic achievement"><svg class="icon" aria-hidden="true"><use href="./assets/icons.svg#chevron-left"></use></svg></button><p class="carousel-progress" aria-live="polite"></p><button type="button" class="carousel-arrow next" aria-label="Next academic achievement"><svg class="icon" aria-hidden="true"><use href="./assets/icons.svg#chevron-right"></use></svg></button></div></div></div></section>
-
-      <section class="page-section theme-vermilion" id="professional-achievements" data-theme="vermilion" aria-labelledby="professional-achievements-title"><div class="section-shell"><div class="section-heading"><p class="section-index">05 / Professional recognition</p><div class="heading-row"><h2 id="professional-achievements-title">Professional achievements<span class="heading-period">.</span></h2><p class="section-intro">Selected recognition and credentials; the engineering impact is in Highlights.</p></div></div><div class="carousel" data-carousel aria-label="Professional achievements"><div class="carousel-track" tabindex="0" aria-label="Professional achievement cards">
-          <article class="slide visual-card evidence-card" aria-label="Oracle Rock Stars Gold Award"><div class="card-copy"><p class="kicker">Oracle / 2024</p><h3><span>Rock Stars</span><span>Gold Award</span></h3><p>Recognized by SaaS Engineering and OAL leadership for contributions to delivery milestones.</p><p class="card-detail">Award announcement excerpt only</p></div><div class="card-media"><img src="./assets/previews/oracle-rock-stars.webp" alt="Oracle email congratulating Nilabro Saha on a Rock Stars Gold Award" width="1600" height="1100"><span class="media-caption">Award email excerpt</span></div></article>
-          <article class="slide visual-card evidence-card" aria-label="Oracle GoldenGate certification"><div class="card-copy"><p class="kicker">Oracle certification / 2026</p><h3><span>GoldenGate 19c</span><span>Implementation</span></h3><p>Oracle Certified Professional credential in GoldenGate implementation, aligned with large-scale data-integration work.</p><p class="card-detail">Awarded June 2026</p></div><div class="card-media"><img src="./assets/previews/oracle-goldengate.webp" alt="Oracle GoldenGate 19c Implementation certificate" width="1600" height="1100"><span class="media-caption">Credential excerpt / ID omitted</span></div></article>
-          <article class="slide visual-card evidence-card" aria-label="Oracle Fusion AI Agent Studio certification"><div class="card-copy"><p class="kicker">Oracle certification / 2026</p><h3><span>Fusion AI</span><span>Agent Studio</span></h3><p>Oracle Certified Developer Professional credential complementing work on AI agent workflows for compensation planning.</p><p class="card-detail">Awarded February 2026</p></div><div class="card-media"><img src="./assets/previews/oracle-fusion-ai.webp" alt="Oracle Fusion AI Agent Studio certificate" width="1600" height="1100"><span class="media-caption">Credential excerpt / ID omitted</span></div></article>
-        </div><div class="carousel-footer"><button type="button" class="carousel-arrow prev" aria-label="Previous professional achievement"><svg class="icon" aria-hidden="true"><use href="./assets/icons.svg#chevron-left"></use></svg></button><p class="carousel-progress" aria-live="polite"></p><button type="button" class="carousel-arrow next" aria-label="Next professional achievement"><svg class="icon" aria-hidden="true"><use href="./assets/icons.svg#chevron-right"></use></svg></button></div></div></div></section>
-
-      <section class="contact-section theme-neutral" id="contact" data-theme="neutral" aria-labelledby="contact-title"><div class="section-shell contact-shell"><div><p class="section-index">06 / Contact</p><h2 id="contact-title">Let’s talk about<br><em>what comes next.</em></h2><p>Research, graduate study, and engineering collaboration.</p></div><div class="contact-links"><a data-link-key="contact-email">Email <span aria-hidden="true">↗</span></a><a data-link-key="contact-linkedin">LinkedIn <span aria-hidden="true">↗</span></a><a data-link-key="contact-orcid">ORCID <span aria-hidden="true">↗</span></a></div></div></section>
-    </main>
-    <footer class="site-footer"><span>© <span id="year">2026</span> Nilabro Saha</span><span>Mechanical engineering × robotics × software</span><a href="#top">Back to top ↑</a></footer>
-  </body>
+       </div>
+      </article>
+      <article aria-label="MechAnalyzer mechanism simulation" class="visual-card project-card">
+       <figure class="card-media vector-preview">
+        <a aria-label="View full-size preview: MechAnalyzer mechanism simulation" class="preview-link" href="./assets/illustrations/mechanalyzer.svg" rel="noopener noreferrer" target="_blank">
+         <img alt="Conceptual diagram of meshing gears, linkage, and coupler curve" decoding="async" height="720" loading="lazy" src="./assets/illustrations/mechanalyzer.svg" width="960"/>
+        </a>
+        <figcaption class="media-caption">
+         Original mechanism illustration
+        </figcaption>
+       </figure>
+       <div class="card-copy">
+        <p class="kicker">
+         IIT Delhi Robotics Lab / May 2020–May 2022
+        </p>
+        <h3>
+         Mechanisms, made interactive
+        </h3>
+        <p>
+         Extended MechAnalyzer with 11 interactive 3D models, including gear trains, straight-line mechanisms, and six- and eight-bar linkages. Added modules for involute gear meshing and the history of mechanism theory.
+        </p>
+        <p class="card-detail">
+         C# · OpenGL · Coupler curves · Kinematic analysis
+        </p>
+        <p class="project-advisors">
+         Supervised by Prof. Subir Kumar Saha, IIT Delhi, and Prof. Rajeevlochana G. Chittawadigi, Amrita School of Engineering, Bengaluru.
+        </p>
+        <div class="media-links">
+         <a class="platform-link" data-link-key="mechanalyzer-demo">
+          <img alt="" aria-hidden="true" class="platform-icon" decoding="async" height="18" src="./assets/platform-icons/youtube.ico" width="18"/>
+          <span class="link-label">
+           YouTube Presentation
+          </span>
+          <span aria-hidden="true" class="external-arrow">↗</span>
+         </a>
+        </div>
+       </div>
+      </article>
+      <article aria-label="Parallel-kinematic system modelling" class="visual-card project-card">
+       <figure class="card-media repository-preview parallel-stage-preview">
+        <a aria-label="View full-size preview: Parallel-kinematic system modelling" class="preview-link" href="./assets/previews/parallel-stage-load-cases.jpg" rel="noopener noreferrer" target="_blank">
+         <span class="repository-crop">
+          <img alt="Initial parallel-kinematic measuring-stage model in MSC Adams" decoding="async" height="1048" loading="lazy" src="./assets/previews/parallel-stage-load-cases.jpg" width="2019"/>
+         </span>
+        </a>
+        <figcaption class="media-caption">
+         Parallel stage — initial simulation model
+        </figcaption>
+       </figure>
+       <div class="card-copy">
+        <p class="kicker">
+         INAE / CSIR-CMERI / May–July 2021
+        </p>
+        <h3>
+         Parallel-kinematic system modelling
+        </h3>
+        <p>
+         Derived a six-state, two-input model of an ultra-precision coordinate measuring stage and evaluated four vertical/lateral loading cases. Separately designed an LQR controller for a four-state cart-pendulum benchmark and explored Adams–Simulink co-simulation; the measuring-stage controller remained future work.
+        </p>
+        <p class="card-detail">
+         140–170 N vertical / 0–20 N lateral loads · MATLAB/Simulink · MSC Adams
+        </p>
+        <p class="project-advisors">
+         Mentored by Dr. N. C. Murmu, CSIR-CMERI, through the INAE engineering student menteeship.
+        </p>
+        <div class="media-links">
+         <a class="platform-link" data-link-key="parallel-kinematic-code">
+          <img alt="" aria-hidden="true" class="platform-icon" decoding="async" height="18" src="./assets/platform-icons/github.svg" width="18"/>
+          <span class="link-label">
+           Code
+          </span>
+          <span aria-hidden="true" class="external-arrow">↗</span>
+         </a>
+        </div>
+       </div>
+      </article>
+      <article aria-label="Wearable technology seminar" class="visual-card seminar-card project-card">
+       <figure class="card-media document-preview">
+        <a aria-label="View full-size preview: Wearable technology seminar" class="preview-link" href="./assets/previews/seminar-wearable-technology.webp" rel="noopener noreferrer" target="_blank">
+         <img alt="Title page of the seminar Evolution of Wearable Technology: Rigid Exoskeletons to Soft Exosuits" decoding="async" height="1100" loading="lazy" src="./assets/previews/seminar-wearable-technology.webp" width="1600"/>
+        </a>
+        <figcaption class="media-caption">
+         Seminar title page
+        </figcaption>
+       </figure>
+       <div class="card-copy">
+        <p class="kicker">
+         Undergraduate seminar / 2021
+        </p>
+        <h3>
+         Wearable technology: hard to soft
+        </h3>
+        <p>
+         A comparative review of rigid exoskeletons and compliant soft exosuits for rehabilitation and human-performance augmentation.
+        </p>
+        <p class="card-detail">
+         NIT Durgapur · September 2021
+        </p>
+        <div class="media-links">
+         <a class="platform-link" data-link-key="seminar-wearable-technology">
+          <img alt="" aria-hidden="true" class="platform-icon" decoding="async" height="18" src="./assets/platform-icons/zenodo.png" width="18"/>
+          <span class="link-label">
+           Zenodo Article
+          </span>
+          <span aria-hidden="true" class="external-arrow">↗</span>
+         </a>
+        </div>
+       </div>
+      </article>
+      <article aria-label="Compliant mechanisms seminar" class="visual-card seminar-card project-card">
+       <figure class="card-media document-preview">
+        <a aria-label="View full-size preview: Compliant mechanisms seminar" class="preview-link" href="./assets/previews/seminar-compliant-mechanisms.webp" rel="noopener noreferrer" target="_blank">
+         <img alt="Title page of the seminar Compliant Mechanisms and Micro-Mechanisms" decoding="async" height="1100" loading="lazy" src="./assets/previews/seminar-compliant-mechanisms.webp" width="1600"/>
+        </a>
+        <figcaption class="media-caption">
+         Seminar title page
+        </figcaption>
+       </figure>
+       <div class="card-copy">
+        <p class="kicker">
+         Undergraduate seminar / 2021
+        </p>
+        <h3>
+         Compliant micro-mechanisms
+        </h3>
+        <p>
+         A review of compliant mechanisms and compliant micro-mechanisms, focused on their design, analysis, and fabrication.
+        </p>
+        <p class="card-detail">
+         NIT Durgapur · September 2021
+        </p>
+        <div class="media-links">
+         <a class="platform-link" data-link-key="seminar-compliant-mechanisms">
+          <img alt="" aria-hidden="true" class="platform-icon" decoding="async" height="18" src="./assets/platform-icons/zenodo.png" width="18"/>
+          <span class="link-label">
+           Zenodo Article
+          </span>
+          <span aria-hidden="true" class="external-arrow">↗</span>
+         </a>
+        </div>
+       </div>
+      </article>
+     </div>
+    </div>
+   </section>
+   <section aria-labelledby="publications-title" class="page-section" id="publications">
+    <div class="section-shell">
+     <div class="section-heading">
+      <p class="section-index">
+       Selected publications
+      </p>
+      <div class="heading-row">
+       <h2 id="publications-title">
+        Publications
+       </h2>
+       <p class="section-intro">
+        First-author conference research on making mechanism behaviour visible.
+       </p>
+      </div>
+     </div>
+     <div class="card-grid publication-grid">
+      <article aria-label="Gear meshing visualization paper" class="visual-card publication-card project-card">
+       <figure class="card-media document-preview">
+        <a aria-label="View full-size preview: Gear meshing visualization paper" class="preview-link" href="./assets/previews/paper-gear-meshing.webp" rel="noopener noreferrer" target="_blank">
+         <img alt="First-page title and complete abstract excerpt from the Gear Meshing Visualization paper" decoding="async" height="792" loading="lazy" src="./assets/previews/paper-gear-meshing.webp" width="1224"/>
+        </a>
+        <figcaption class="media-caption">
+         Title and abstract excerpt
+        </figcaption>
+       </figure>
+       <div class="card-copy">
+        <p class="kicker">
+         iNaCoMM / Springer
+        </p>
+        <h3>
+         Gear meshing visualization
+        </h3>
+        <p class="publication-dates">
+         Published: 2023 · First online: 2022
+        </p>
+        <p>
+         <cite>Gear Meshing Visualization for Effective Education Using MechAnalyzer Software.</cite>
+         A first-author paper on interactive involute gear behaviour as a teaching aid.
+        </p>
+        <p class="card-detail">
+         Nilabro Saha · R. G. Chittawadigi · S. K. Saha
+        </p>
+        <div class="media-links">
+         <a class="platform-link" data-link-key="gear-meshing-paper">
+          <img alt="" aria-hidden="true" class="platform-icon" decoding="async" height="18" src="./assets/platform-icons/springer.ico" width="18"/>
+          <span class="link-label">
+           View Paper
+          </span>
+          <span aria-hidden="true" class="external-arrow">↗</span>
+         </a>
+         <a class="platform-link" data-link-key="gear-meshing-presentation">
+          <img alt="" aria-hidden="true" class="platform-icon" decoding="async" height="18" src="./assets/platform-icons/youtube.ico" width="18"/>
+          <span class="link-label">
+           YouTube Presentation
+          </span>
+          <span aria-hidden="true" class="external-arrow">↗</span>
+         </a>
+        </div>
+       </div>
+      </article>
+      <article aria-label="MechAnalyzer kinematics education paper" class="visual-card publication-card project-card">
+       <figure class="card-media document-preview">
+        <a aria-label="View full-size preview: MechAnalyzer kinematics education paper" class="preview-link" href="./assets/previews/paper-linkage-kinematics.webp" rel="noopener noreferrer" target="_blank">
+         <img alt="First-page title and complete abstract excerpt from the MechAnalyzer kinematics education paper" decoding="async" height="792" loading="lazy" src="./assets/previews/paper-linkage-kinematics.webp" width="1224"/>
+        </a>
+        <figcaption class="media-caption">
+         Title and abstract excerpt
+        </figcaption>
+       </figure>
+       <div class="card-copy">
+        <p class="kicker">
+         IFToMM Asian MMS / Springer
+        </p>
+        <h3>
+         Teaching kinematics through simulation
+        </h3>
+        <p class="publication-dates">
+         Published: 2022 · First online: 2021
+        </p>
+        <p>
+         <cite>MechAnalyzer for Teaching of Kinematics of Linkage Mechanisms Through Simulations and Historical Context.</cite>
+         A first-author paper connecting virtual models with mechanism history.
+        </p>
+        <p class="card-detail">
+         Nilabro Saha · R. G. Chittawadigi · S. K. Saha
+        </p>
+        <div class="media-links">
+         <a class="platform-link" data-link-key="kinematics-paper">
+          <img alt="" aria-hidden="true" class="platform-icon" decoding="async" height="18" src="./assets/platform-icons/springer.ico" width="18"/>
+          <span class="link-label">
+           View Paper
+          </span>
+          <span aria-hidden="true" class="external-arrow">↗</span>
+         </a>
+        </div>
+       </div>
+      </article>
+     </div>
+    </div>
+   </section>
+   <section aria-labelledby="background-title" class="page-section" id="background">
+    <div class="section-shell">
+     <div class="section-heading">
+      <p class="section-index">
+       Academic foundation
+      </p>
+      <div class="heading-row">
+       <h2 id="background-title">
+        Education
+       </h2>
+       <p class="section-intro">
+        Mechanical engineering foundations and ongoing graduate study in computational perception and robotics.
+       </p>
+      </div>
+     </div>
+     <div class="card-grid education-grid">
+      <article aria-label="Georgia Tech graduate education" class="project-card education-card">
+       <div class="card-copy">
+        <p class="kicker">
+         Georgia Institute of Technology / Online
+        </p>
+        <h3>
+         M.S. in Computer Science
+        </h3>
+        <p class="education-dates">
+         August 2026–present · In progress
+        </p>
+        <p>
+         Specialization: Computational Perception and Robotics.
+        </p>
+        <p>
+         Current course: CS 7638: Robotics: AI Techniques — in progress. Topics include Bayesian filters, search, PID control, and SLAM.
+        </p>
+       </div>
+      </article>
+      <article aria-label="NIT Durgapur undergraduate education" class="project-card education-card">
+       <div class="card-copy">
+        <p class="kicker">
+         National Institute of Technology Durgapur
+        </p>
+        <h3>
+         B.Tech. in Mechanical Engineering
+        </h3>
+        <p class="education-dates">
+         June 2018–May 2022
+        </p>
+        <p>
+         <strong>9.31/10</strong>
+         GPA · First Class with Distinction · Ranked
+         <strong>2nd out of 149</strong>
+         students in Mechanical Engineering.
+        </p>
+        <p>
+         Lifetime Member, Association for Mechanisms and Machines (AMM India).
+        </p>
+       </div>
+      </article>
+     </div>
+    </div>
+   </section>
+   <section aria-labelledby="academic-achievements-title" class="page-section" id="academic-achievements">
+    <div class="section-shell">
+     <div class="section-heading">
+      <p class="section-index">
+       Academic recognition
+      </p>
+      <div class="heading-row">
+       <h2 id="academic-achievements-title">
+        Academic achievements
+       </h2>
+       <p class="section-intro">
+        A selection of awards, mentoring, and research presentations.
+       </p>
+      </div>
+     </div>
+     <div class="card-grid">
+      <article aria-label="OPJEMS 2019 scholarship" class="visual-card evidence-card project-card">
+       <figure class="card-media">
+        <a aria-label="View full-size preview: OPJEMS 2019 scholarship" class="preview-link" href="./assets/previews/opjems-2019.webp" rel="noopener noreferrer" target="_blank">
+         <img alt="OPJEMS 2019 scholarship certificate bearing Nilabro Saha's name" decoding="async" height="1100" loading="lazy" src="./assets/previews/opjems-2019.webp" width="1600"/>
+        </a>
+        <figcaption class="media-caption">
+         Certificate excerpt
+        </figcaption>
+       </figure>
+       <div class="card-copy">
+        <p class="kicker">
+         Scholarship / 2019
+        </p>
+        <h3>
+         OPJEMS 2019
+        </h3>
+        <p>
+         Named an OP Jindal Engineering and Management Scholar during the second year of mechanical engineering studies, selected on academic performance and an independently developed socially-minded business proposal.
+        </p>
+        <p class="card-detail">
+         First of two consecutive OPJEMS awards
+        </p>
+        <div class="media-links">
+         <a class="platform-link" data-link-key="opjems-proposals">
+          <img alt="" aria-hidden="true" class="platform-icon" decoding="async" height="18" src="./assets/platform-icons/zenodo.png" width="18"/>
+          <span class="link-label">
+           Browse Proposals
+          </span>
+          <span aria-hidden="true" class="external-arrow">↗</span>
+         </a>
+        </div>
+       </div>
+      </article>
+      <article aria-label="OPJEMS 2020 scholarship" class="visual-card evidence-card project-card">
+       <figure class="card-media">
+        <a aria-label="View full-size preview: OPJEMS 2020 scholarship" class="preview-link" href="./assets/previews/opjems-2020.webp" rel="noopener noreferrer" target="_blank">
+         <img alt="OPJEMS 2020 scholarship certificate bearing Nilabro Saha's name" decoding="async" height="1100" loading="lazy" src="./assets/previews/opjems-2020.webp" width="1600"/>
+        </a>
+        <figcaption class="media-caption">
+         Certificate excerpt
+        </figcaption>
+       </figure>
+       <div class="card-copy">
+        <p class="kicker">
+         Scholarship / 2020
+        </p>
+        <h3>
+         OPJEMS 2020
+        </h3>
+        <p>
+         Received the OP Jindal Engineering and Management Scholarship for a second year.
+        </p>
+        <p class="card-detail">
+         Two-time recipient / Mechanical Engineering
+        </p>
+        <div class="media-links">
+         <a class="platform-link" data-link-key="opjems-proposals">
+          <img alt="" aria-hidden="true" class="platform-icon" decoding="async" height="18" src="./assets/platform-icons/zenodo.png" width="18"/>
+          <span class="link-label">
+           Browse Proposals
+          </span>
+          <span aria-hidden="true" class="external-arrow">↗</span>
+         </a>
+        </div>
+       </div>
+      </article>
+      <article aria-label="INAE engineering student menteeship" class="visual-card evidence-card project-card">
+       <figure class="card-media">
+        <a aria-label="View full-size preview: INAE engineering student menteeship" class="preview-link" href="./assets/previews/inae-mentee.webp" rel="noopener noreferrer" target="_blank">
+         <img alt="INAE approval and named appendix excerpts" decoding="async" height="1100" loading="lazy" src="./assets/previews/inae-mentee.webp" width="1600"/>
+        </a>
+        <figcaption class="media-caption">
+         Two document excerpts
+        </figcaption>
+       </figure>
+       <div class="card-copy">
+        <p class="kicker">
+         INAE / 2021
+        </p>
+        <h3>
+         Engineering student mentee
+        </h3>
+        <p>
+         Selected for mentoring by INAE Fellow Dr. Naresh Chandra Murmu of CSIR-CMERI Durgapur.
+        </p>
+        <p class="card-detail">
+         Approval email and named appendix row
+        </p>
+       </div>
+      </article>
+      <article aria-label="CSIR-CMERI summer internship" class="visual-card evidence-card project-card">
+       <figure class="card-media">
+        <a aria-label="View full-size preview: CSIR-CMERI summer internship" class="preview-link" href="./assets/previews/cmeri-internship.webp" rel="noopener noreferrer" target="_blank">
+         <img alt="CSIR-CMERI summer internship certificate" decoding="async" height="1100" loading="lazy" src="./assets/previews/cmeri-internship.webp" width="1600"/>
+        </a>
+        <figcaption class="media-caption">
+         Certificate excerpt
+        </figcaption>
+       </figure>
+       <div class="card-copy">
+        <p class="kicker">
+         Research internship / 2021
+        </p>
+        <h3>
+         CSIR-CMERI summer research
+        </h3>
+        <p>
+         Completed an internship assignment on co-simulation of a vertical parallel-kinematic structure using ADAMS and MATLAB/Simulink.
+        </p>
+        <p class="card-detail">
+         Durgapur / June–July 2021
+        </p>
+       </div>
+      </article>
+      <article aria-label="iNaCoMM paper presentation" class="visual-card evidence-card project-card">
+       <figure class="card-media">
+        <a aria-label="View full-size preview: iNaCoMM paper presentation" class="preview-link" href="./assets/previews/inacomm-2021.webp" rel="noopener noreferrer" target="_blank">
+         <img alt="iNaCoMM 2021 paper presentation certificate" decoding="async" height="1100" loading="lazy" src="./assets/previews/inacomm-2021.webp" width="1600"/>
+        </a>
+        <figcaption class="media-caption">
+         Certificate excerpt
+        </figcaption>
+       </figure>
+       <div class="card-copy">
+        <p class="kicker">
+         Conference / 2021
+        </p>
+        <h3>
+         iNaCoMM paper presentation
+        </h3>
+        <p>
+         Presented work on MechAnalyzer and the teaching of gear meshing at the International and National Conference on Machines and Mechanisms.
+        </p>
+        <p class="card-detail">
+         Conference presentation certificate
+        </p>
+       </div>
+      </article>
+      <article aria-label="Smart India Hackathon participation" class="visual-card evidence-card project-card">
+       <figure class="card-media">
+        <a aria-label="View full-size preview: Smart India Hackathon participation" class="preview-link" href="./assets/previews/sih-2020.webp" rel="noopener noreferrer" target="_blank">
+         <img alt="Smart India Hackathon 2020 certificate" decoding="async" height="1100" loading="lazy" src="./assets/previews/sih-2020.webp" width="1600"/>
+        </a>
+        <figcaption class="media-caption">
+         Certificate excerpt
+        </figcaption>
+       </figure>
+       <div class="card-copy">
+        <p class="kicker">
+         Hardware hackathon / 2020
+        </p>
+        <h3>
+         Smart India Hackathon
+        </h3>
+        <p>
+         L3E Round Qualifier in the 2020 Hardware Edition as a member of Team Gutenberg.
+        </p>
+        <p class="card-detail">
+         Team Gutenberg / certificate of participation
+        </p>
+        <div class="media-links">
+         <a class="platform-link" data-link-key="sih-submission">
+          <img alt="" aria-hidden="true" class="platform-icon" decoding="async" height="18" src="./assets/platform-icons/youtube.ico" width="18"/>
+          <span class="link-label">
+           YouTube Presentation
+          </span>
+          <span aria-hidden="true" class="external-arrow">↗</span>
+         </a>
+        </div>
+       </div>
+      </article>
+     </div>
+    </div>
+   </section>
+   <section aria-labelledby="professional-achievements-title" class="page-section" id="professional-achievements">
+    <div class="section-shell">
+     <div class="section-heading">
+      <p class="section-index">
+       Professional recognition
+      </p>
+      <div class="heading-row">
+       <h2 id="professional-achievements-title">
+        Professional achievements
+       </h2>
+       <p class="section-intro">
+        Selected recognition and credentials, alongside the engineering impact described in Highlights.
+       </p>
+      </div>
+     </div>
+     <div class="card-grid">
+      <article aria-label="Oracle Rock Stars Gold Award" class="visual-card evidence-card project-card">
+       <figure class="card-media">
+        <a aria-label="View full-size preview: Oracle Rock Stars Gold Award" class="preview-link" href="./assets/previews/oracle-rock-stars-badge.png" rel="noopener noreferrer" target="_blank">
+         <img alt="Oracle SaaS Engineering and OAL Rock Stars Gold Award badge, September 2024" class="award-badge" decoding="async" height="120" loading="lazy" src="./assets/previews/oracle-rock-stars-badge.png" width="90"/>
+        </a>
+        <figcaption class="media-caption">
+         Rock Stars Gold Award badge
+        </figcaption>
+       </figure>
+       <div class="card-copy">
+        <p class="kicker">
+         Oracle / 2024
+        </p>
+        <h3>
+         Rock Stars Gold Award
+        </h3>
+        <p>
+         Recognized by SaaS Engineering and OAL leadership for contributions to delivery milestones.
+        </p>
+        <p class="card-detail">
+         Awarded September 2024
+        </p>
+       </div>
+      </article>
+      <article aria-label="Oracle GoldenGate certification" class="visual-card evidence-card project-card">
+       <figure class="card-media">
+        <a aria-label="View full-size preview: Oracle GoldenGate certification" class="preview-link" href="./assets/previews/oracle-goldengate.webp" rel="noopener noreferrer" target="_blank">
+         <img alt="Oracle GoldenGate 19c Implementation certificate" decoding="async" height="1100" loading="lazy" src="./assets/previews/oracle-goldengate.webp" width="1600"/>
+        </a>
+        <figcaption class="media-caption">
+         Credential excerpt / ID omitted
+        </figcaption>
+       </figure>
+       <div class="card-copy">
+        <p class="kicker">
+         Oracle certification / 2026
+        </p>
+        <h3>
+         GoldenGate 19c Implementation
+        </h3>
+        <p>
+         Oracle Certified Professional credential in GoldenGate implementation, aligned with large-scale data-integration work.
+        </p>
+        <p class="card-detail">
+         Awarded June 2026
+        </p>
+       </div>
+      </article>
+      <article aria-label="Oracle Fusion AI Agent Studio certification" class="visual-card evidence-card project-card">
+       <figure class="card-media">
+        <a aria-label="View full-size preview: Oracle Fusion AI Agent Studio certification" class="preview-link" href="./assets/previews/oracle-fusion-ai.webp" rel="noopener noreferrer" target="_blank">
+         <img alt="Oracle Fusion AI Agent Studio certificate" decoding="async" height="1100" loading="lazy" src="./assets/previews/oracle-fusion-ai.webp" width="1600"/>
+        </a>
+        <figcaption class="media-caption">
+         Credential excerpt / ID omitted
+        </figcaption>
+       </figure>
+       <div class="card-copy">
+        <p class="kicker">
+         Oracle certification / 2026
+        </p>
+        <h3>
+         Fusion AI Agent Studio
+        </h3>
+        <p>
+         Oracle Certified Developer Professional credential complementing work on AI agent workflows for compensation planning.
+        </p>
+        <p class="card-detail">
+         Awarded February 2026
+        </p>
+       </div>
+      </article>
+     </div>
+     <p class="additional-certifications">
+      <strong>Additional certifications:</strong>
+      OCI Generative AI · OCI DevOps
+     </p>
+    </div>
+   </section>
+  </main>
+  <footer class="site-footer">
+   <span>©
+    <span id="year">
+     2026</span>
+    Nilabro Saha
+   </span>
+   <span>Mechanical engineering × robotics × software</span>
+   <a href="#top">
+    Back to top ↑
+   </a>
+  </footer>
+ </body>
 </html>
