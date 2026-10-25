@@ -6,14 +6,14 @@
 .education-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .education-heading { display: grid; grid-template-columns: minmax(0, 1fr) 80px; align-items: start; gap: 20px; }
 .education-logo { display: block; justify-self: end; width: 80px; height: 80px; object-fit: contain; }
-.project-card { display: flex; flex-direction: column; min-width: 0; border: 1px solid var(--line); background: var(--paper); }
+.project-card { display: flex; flex-direction: column; min-width: 0; border: 1px solid var(--line); border-radius: 5px; background: var(--paper); transition: transform .18s ease, box-shadow .18s ease; }
 .card-copy, .highlight-copy { display: flex; flex: 1; flex-direction: column; min-width: 0; padding: 22px; }
 .kicker { margin: 0 0 12px; color: var(--vermilion-dark); font-size: .63rem; font-weight: 700; letter-spacing: .075em; line-height: 1.6; text-transform: uppercase; }
 .project-card h3 { margin: 0; font-size: 1.13rem; line-height: 1.4; letter-spacing: -.03em; font-weight: 680; overflow-wrap: anywhere; }
 .card-copy > p:not([class]) { margin: 13px 0 0; color: var(--ink-muted); font-size: .86rem; line-height: 1.7; }
 .card-copy cite { font-style: normal; }
 .card-detail { margin: 18px 0 0; padding-top: 14px; border-top: 1px solid var(--line); color: var(--ink-muted); font-size: .73rem; line-height: 1.65; }
-.card-media { margin: 0; border-bottom: 1px solid var(--line); background: #e7e9e3; }
+.card-media { margin: 0; overflow: hidden; border-radius: 4px 4px 0 0; border-bottom: 1px solid var(--line); background: #e7e9e3; }
 .preview-link { display: flex; align-items: center; justify-content: center; aspect-ratio: 16 / 10; padding: 0; overflow: hidden; container-type: size; }
 .preview-link:hover { background: #e1e4dc; }
 .preview-link:focus-visible { outline-offset: -4px; }
@@ -37,5 +37,9 @@
 .card-copy p.publication-dates, .card-copy p.education-dates { margin: 13px 0 0; color: var(--vermilion-dark); font-size: .74rem; font-weight: 550; line-height: 1.7; }
 .additional-certifications { margin: 24px 0 0; color: var(--ink-muted); font-size: .85rem; }
 .additional-certifications strong { color: var(--ink); font-weight: 600; }
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(21, 23, 26, .08), 0 2px 6px rgba(21, 23, 26, .04); }
+}
+@media (prefers-reduced-motion: reduce) { .project-card:hover { transform: none; } }
 @media (max-width: 1000px) { .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 700px) { .card-grid { grid-template-columns: 1fr; } }
