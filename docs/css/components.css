@@ -4,6 +4,8 @@
 .card-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
 .publication-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .education-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.education-heading { display: grid; grid-template-columns: minmax(0, 1fr) 80px; align-items: start; gap: 20px; }
+.education-logo { display: block; justify-self: end; width: 80px; height: 80px; object-fit: contain; }
 .project-card { display: flex; flex-direction: column; min-width: 0; border: 1px solid var(--line); background: var(--paper); }
 .card-copy, .highlight-copy { display: flex; flex: 1; flex-direction: column; min-width: 0; padding: 22px; }
 .kicker { margin: 0 0 12px; color: var(--vermilion-dark); font-size: .63rem; font-weight: 700; letter-spacing: .075em; line-height: 1.6; text-transform: uppercase; }

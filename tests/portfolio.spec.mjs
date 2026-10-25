@@ -135,6 +135,16 @@ for (const width of [390, 768, 1024, 1440]) {
       }
     }
     const badge = await page.locator('.award-badge').boundingBox();
+    for (const card of await page.locator('.education-card').all()) {
+      const bounds = await card.boundingBox();
+      const logo = await card.locator('.education-logo').boundingBox();
+      const heading = await card.locator('.education-heading > div').boundingBox();
+      expect(logo.width).toBe(80);
+      expect(logo.height).toBe(80);
+      expect(Math.abs(bounds.x + bounds.width - logo.x - logo.width - 23)).toBeLessThan(1);
+      expect(Math.abs(logo.y - bounds.y - 23)).toBeLessThan(1);
+      expect(heading.x + heading.width).toBeLessThanOrEqual(logo.x - 19);
+    }
     expect(badge.width).toBe(90);
     expect(badge.height).toBe(120);
     await page.screenshot({ path: testInfo.outputPath(`portfolio-${width}.png`), fullPage: true });
