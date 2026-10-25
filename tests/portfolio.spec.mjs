@@ -43,6 +43,7 @@ test('preserves all content, evidence previews, and configured destinations', as
     await expect(link).toHaveAccessibleName(/View full-size preview/);
   }
   await expect(page.locator('.preview-link')).toHaveCount(16);
+  await expect(page.locator('.media-caption, .card-media figcaption')).toHaveCount(0);
   expect(failed).toEqual([]);
   expect(errors).toEqual([]);
 });
@@ -105,8 +106,9 @@ for (const width of [390, 768, 1024, 1440]) {
           width: window.width / scale,
           height: window.height / scale,
           scaleDifference: Math.abs(scale - bounds.height / image.naturalHeight),
-          inside: window.left >= preview.left + 13 && window.right <= preview.right - 13
-            && window.top >= preview.top + 13 && window.bottom <= preview.bottom - 13,
+          inside: window.left >= preview.left - 1 && window.right <= preview.right + 1
+            && window.top >= preview.top - 1 && window.bottom <= preview.bottom + 1,
+          fill: Math.max(window.width / preview.width, window.height / preview.height),
           displayedWidth: window.width,
         };
       });
@@ -116,6 +118,7 @@ for (const width of [390, 768, 1024, 1440]) {
       expect(framing.height).toBeCloseTo(expectedHeight, 0);
       expect(framing.scaleDifference).toBeLessThan(.0001);
       expect(framing.inside).toBe(true);
+      expect(framing.fill).toBeCloseTo(1, 2);
       expect(framing.displayedWidth).toBeGreaterThan(100);
     }
     for (const link of await page.locator('.platform-link').all()) {
@@ -134,7 +137,12 @@ for (const width of [390, 768, 1024, 1440]) {
         expect(Math.abs(box.y + box.height / 2 - primary.y - primary.height / 2)).toBeLessThan(2);
       }
     }
-    const badge = await page.locator('.award-badge').boundingBox();
+    for (const preview of await page.locator('.preview-link:not(.repository-preview .preview-link)').all()) {
+      const frame = await preview.boundingBox();
+      const image = await preview.locator('img').boundingBox();
+      expect(image.width).toBeCloseTo(frame.width, 1);
+      expect(image.height).toBeCloseTo(frame.height, 1);
+    }
     for (const card of await page.locator('.education-card').all()) {
       const bounds = await card.boundingBox();
       const logo = await card.locator('.education-logo').boundingBox();
@@ -145,8 +153,6 @@ for (const width of [390, 768, 1024, 1440]) {
       expect(Math.abs(logo.y - bounds.y - 23)).toBeLessThan(1);
       expect(heading.x + heading.width).toBeLessThanOrEqual(logo.x - 19);
     }
-    expect(badge.width).toBe(90);
-    expect(badge.height).toBe(120);
     await page.screenshot({ path: testInfo.outputPath(`portfolio-${width}.png`), fullPage: true });
     await page.screenshot({ path: testInfo.outputPath(`intro-${width}.png`) });
     await page.locator('#background').screenshot({ path: testInfo.outputPath(`background-${width}.png`) });
@@ -339,7 +345,7 @@ test('contacts appear once in the introduction and the old contact anchor remain
   await expect(contacts).toBeInViewport();
 });
 
-test('award preview uses the supplied native-size badge and no email-excerpt language', async ({ page }) => {
+test('award preview fits the supplied badge without email-excerpt language', async ({ page }) => {
   await page.goto('/');
   const award = page.locator('[aria-label="Oracle Rock Stars Gold Award"]');
   const image = award.locator('.award-badge');
@@ -348,7 +354,7 @@ test('award preview uses the supplied native-size badge and no email-excerpt lan
   await expect(award.locator('.preview-link')).toHaveAttribute('href', './assets/previews/oracle-rock-stars-badge.png');
   await expect(image).toHaveAttribute('alt', /Gold Award badge, September 2024/);
   await expect.poll(() => image.evaluate(element => [element.naturalWidth, element.naturalHeight])).toEqual([90, 120]);
-  await expect(award.locator('.media-caption')).toHaveText('Rock Stars Gold Award badge');
+  await expect(award.locator('figcaption')).toHaveCount(0);
   await expect(award.locator('.card-detail')).toHaveText('Awarded September 2024');
   await expect(award).not.toContainText(/email|excerpt/i);
 });
@@ -417,15 +423,15 @@ test('repository images replace only the selected diagrams and open the complete
   await page.goto('/');
   await loadPreviews(page);
   const figures = [
-    ['Underactuated hand exoskeleton', 'exoskeleton-assembly.jpg', 'Hand exoskeleton — frontal CAD view', [2174, 2208]],
-    ['Parallel-kinematic system modelling', 'parallel-stage-load-cases.jpg', 'Parallel stage — initial simulation model', [2019, 1048]],
+    ['Underactuated hand exoskeleton', 'exoskeleton-assembly.jpg', [2174, 2208]],
+    ['Parallel-kinematic system modelling', 'parallel-stage-load-cases.jpg', [2019, 1048]],
   ];
-  for (const [label, file, caption, dimensions] of figures) {
+  for (const [label, file, dimensions] of figures) {
     const card = page.locator(`article[aria-label="${label}"]`);
     const figure = card.locator('.repository-preview');
     await expect(figure.locator('img')).toHaveAttribute('src', `./assets/previews/${file}`);
     await expect(figure.locator('.preview-link')).toHaveAttribute('href', `./assets/previews/${file}`);
-    await expect(figure.locator('.media-caption')).toHaveText(caption);
+    await expect(figure.locator('figcaption')).toHaveCount(0);
     expect(await figure.locator('img').evaluate(image => [image.naturalWidth, image.naturalHeight])).toEqual(dimensions);
     await expect(card.getByRole('link', { name: 'Code', exact: true })).toBeVisible();
     const popupPromise = page.waitForEvent('popup');
@@ -437,4 +443,23 @@ test('repository images replace only the selected diagrams and open the complete
   }
   await expect(page.locator('[aria-label="MechAnalyzer mechanism simulation"] .preview-link img')).toHaveAttribute('src', './assets/illustrations/mechanalyzer.svg');
   await expect(page.locator('#academic-work .repository-preview')).toHaveCount(2);
+});
+
+test('certificate cards load responsive previews and retain high-resolution full-size images', async ({ page }) => {
+  const { readFile } = await import('node:fs/promises');
+  const manifest = JSON.parse(await readFile(new URL('../docs/assets/previews/CERTIFICATE-SOURCES.json', import.meta.url), 'utf8'));
+  await page.goto('/');
+  await loadPreviews(page);
+  expect(manifest).toHaveLength(8);
+  for (const entry of manifest) {
+    const image = page.locator(`.card-media img[src^="./assets/previews/${entry.name}.webp?"]`);
+    await expect(image).toHaveCount(1);
+    await expect(image).toHaveAttribute('width', String(entry.width));
+    await expect(image).toHaveAttribute('height', String(entry.height));
+    await expect(image).toHaveAttribute('srcset', `./assets/previews/${entry.name}-preview.webp?v=${entry.version} ${entry.preview_width}w, ./assets/previews/${entry.name}.webp?v=${entry.version} ${entry.width}w`);
+    expect(await image.evaluate(element => element.currentSrc)).toContain(`${entry.name}-preview.webp`);
+    const response = await page.request.get(await image.getAttribute('src'));
+    expect(response.ok()).toBe(true);
+    expect(response.headers()['content-type']).toContain('image/webp');
+  }
 });

@@ -1,0 +1,168 @@
+[
+  {
+    "name": "opjems-2019",
+    "width": 4588,
+    "height": 3200,
+    "bytes": 6043400,
+    "preview_width": 1600,
+    "preview_height": 1116,
+    "source": "Academic Certificates/001-OPJEMS-2019-saha-nilabro.pdf",
+    "page": 1,
+    "crop": [
+      0.004,
+      0,
+      1,
+      1
+    ],
+    "dpi": 400,
+    "lossless": true,
+    "redacted": false,
+    "added_padding": 0,
+    "version": "1c6f01ac8a2b"
+  },
+  {
+    "name": "opjems-2020",
+    "width": 4289,
+    "height": 2931,
+    "bytes": 4799320,
+    "preview_width": 1600,
+    "preview_height": 1093,
+    "source": "Academic Certificates/002-OPJEMS-2020-saha-nilabro.pdf",
+    "page": 1,
+    "crop": [
+      0.045,
+      0.045,
+      0.962,
+      0.93
+    ],
+    "dpi": 400,
+    "lossless": true,
+    "redacted": false,
+    "added_padding": 0,
+    "version": "477343c82e3c"
+  },
+  {
+    "name": "cmeri-internship",
+    "width": 4406,
+    "height": 2964,
+    "bytes": 6211214,
+    "preview_width": 1600,
+    "preview_height": 1076,
+    "source": "Academic Certificates/003-CMERI-internship-saha-nilabro.pdf",
+    "page": 1,
+    "crop": [
+      0.02,
+      0.054,
+      0.962,
+      0.95
+    ],
+    "dpi": 400,
+    "lossless": true,
+    "redacted": false,
+    "added_padding": 0,
+    "version": "bd01d8691649"
+  },
+  {
+    "name": "sih-2020",
+    "width": 4678,
+    "height": 3170,
+    "bytes": 2128748,
+    "preview_width": 1600,
+    "preview_height": 1084,
+    "source": "Academic Certificates/004-SIH2020-saha-nilabro.pdf",
+    "page": 1,
+    "crop": [
+      0,
+      0.019,
+      1,
+      0.978
+    ],
+    "dpi": 400,
+    "lossless": true,
+    "redacted": false,
+    "added_padding": 0,
+    "version": "f72f1d64f512"
+  },
+  {
+    "name": "inacomm-2021",
+    "width": 4402,
+    "height": 3043,
+    "bytes": 434502,
+    "preview_width": 1600,
+    "preview_height": 1106,
+    "source": "Academic Certificates/005-iNaCoMM2021-saha-nilabro.pdf",
+    "page": 1,
+    "crop": [
+      0.029,
+      0.042,
+      0.97,
+      0.962
+    ],
+    "dpi": 400,
+    "lossless": true,
+    "redacted": false,
+    "added_padding": 0,
+    "version": "d0b5c53470b1"
+  },
+  {
+    "name": "oracle-goldengate",
+    "width": 3859,
+    "height": 2733,
+    "bytes": 2329180,
+    "preview_width": 1600,
+    "preview_height": 1133,
+    "source": "Professional Certificates/2026-06-05 - Oracle GoldenGate 19c Implementation Certified Professional.pdf",
+    "page": 1,
+    "crop": [
+      0.063,
+      0.074,
+      0.94,
+      0.878
+    ],
+    "dpi": 400,
+    "lossless": true,
+    "redacted": false,
+    "added_padding": 0,
+    "version": "1b501a2889cb"
+  },
+  {
+    "name": "oracle-fusion-ai",
+    "width": 3859,
+    "height": 2733,
+    "bytes": 2331122,
+    "preview_width": 1600,
+    "preview_height": 1133,
+    "source": "Professional Certificates/2026-02-16 - Fusion AI Agent Studio Developer Professional.pdf",
+    "page": 1,
+    "crop": [
+      0.063,
+      0.074,
+      0.94,
+      0.878
+    ],
+    "dpi": 400,
+    "lossless": true,
+    "redacted": false,
+    "added_padding": 0,
+    "version": "69fc971a6732"
+  },
+  {
+    "name": "inae-mentee",
+    "width": 2642,
+    "height": 697,
+    "bytes": 60874,
+    "preview_width": 1600,
+    "preview_height": 422,
+    "source": "INAE-mentee-saha-nilabro.pdf",
+    "pages": [
+      2,
+      4
+    ],
+    "dpi": 400,
+    "lossless": true,
+    "redacted": false,
+    "added_padding": 0,
+    "note": "Two separate excerpts: approval passage and complete named appendix row; an 8px separator distinguishes them at 400 DPI.",
+    "version": "8cca1f9df9b2"
+  }
+]

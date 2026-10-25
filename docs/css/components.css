@@ -14,18 +14,15 @@
 .card-copy cite { font-style: normal; }
 .card-detail { margin: 18px 0 0; padding-top: 14px; border-top: 1px solid var(--line); color: var(--ink-muted); font-size: .73rem; line-height: 1.65; }
 .card-media { margin: 0; border-bottom: 1px solid var(--line); background: #e7e9e3; }
-.preview-link { display: flex; align-items: center; justify-content: center; aspect-ratio: 16 / 10; padding: 14px; }
+.preview-link { display: flex; align-items: center; justify-content: center; aspect-ratio: 16 / 10; padding: 0; overflow: hidden; container-type: size; }
 .preview-link:hover { background: #e1e4dc; }
 .preview-link:focus-visible { outline-offset: -4px; }
-.card-media img { width: 100%; height: 100%; min-width: 0; min-height: 0; object-fit: contain; }
-.card-media .award-badge { width: 90px; height: 120px; flex: 0 0 auto; }
+.card-media img { width: 100cqw; height: 100cqh; min-width: 0; min-height: 0; object-fit: contain; }
 .repository-preview { --crop-x: 36; --crop-y: 36; }
 .exoskeleton-preview { --source-width: 2174; --crop-width: 1040; --crop-height: 780; }
 .parallel-stage-preview { --source-width: 2019; --crop-width: 637; --crop-height: 430; }
-.repository-preview .preview-link { container-type: size; }
 .repository-crop { position: relative; display: block; flex: none; overflow: hidden; width: min(100cqw, calc(100cqh * var(--crop-width) / var(--crop-height))); aspect-ratio: var(--crop-width) / var(--crop-height); }
 .repository-crop img { position: absolute; max-width: none; width: calc(100% * var(--source-width) / var(--crop-width)); height: auto; left: calc(-100% * var(--crop-x) / var(--crop-width)); top: calc(-100% * var(--crop-y) / var(--crop-height)); }
-.media-caption { padding: 0 14px 12px; color: var(--ink-muted); font-size: .61rem; line-height: 1.5; }
 .media-links { display: flex; flex-wrap: wrap; gap: 4px 18px; margin-top: auto; padding-top: 20px; }
 .platform-link { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; max-width: 100%; padding: 0; color: var(--vermilion-dark); font-size: .78rem; font-weight: 600; line-height: 1.4; text-decoration: none; text-underline-offset: 4px; white-space: nowrap; }
 .platform-link:hover { text-decoration: underline; }
