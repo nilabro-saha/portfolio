@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 const sectionCounts = {
-  highlights: 3,
+  highlights: 4,
   'academic-work': 5,
   publications: 2,
   background: 2,
@@ -29,9 +29,9 @@ test('preserves all content, evidence previews, and configured destinations', as
     await expect(page.locator(`#${section} .project-card`)).toHaveCount(count);
   }
   await expect(page.locator('#highlights h3')).toHaveText([
-    'Research and mechanisms.', 'Academic trajectory and leadership.', 'Systems and performance.',
+    'Research & mechanisms.', 'Academics & leadership.', 'Data & performance.', 'Enterprise applications & AI.',
   ]);
-  await expect(page.locator('#highlights li')).toHaveCount(13);
+  await expect(page.locator('#highlights li')).toHaveCount(14);
   await expect(page.locator('.carousel, .section-rail, [data-carousel]')).toHaveCount(0);
   await expect(page.locator('#academic-work img[src*="seminar-"]')).toHaveCount(2);
   await expect(page.locator('[data-link-key="seminar-wearable-technology"]')).toHaveAttribute('href', 'https://doi.org/10.5281/zenodo.22843036');
@@ -76,7 +76,7 @@ for (const width of [390, 768, 1024, 1440]) {
     for (const [section, count] of Object.entries(sectionCounts)) {
       const grid = page.locator(`#${section} .card-grid`);
       const columns = await grid.evaluate(element => getComputedStyle(element).gridTemplateColumns.split(' ').length);
-      const sectionColumns = ['academic-achievements', 'professional-achievements'].includes(section) && width > 1000 ? 4
+      const sectionColumns = ['highlights', 'academic-achievements', 'professional-achievements'].includes(section) && width > 1000 ? 4
         : ['publications', 'background'].includes(section) ? Math.min(2, expectedColumns) : expectedColumns;
       expect(columns).toBe(sectionColumns);
       const bounds = await grid.locator('.project-card').evaluateAll(cards => cards.map(card => {
@@ -199,7 +199,7 @@ test('without JavaScript all content and native navigation remain available', as
   await page.locator('.site-nav a[href="#academic-work"]').click();
   await expect(page).toHaveURL(/#academic-work$/);
   await expect(page.locator('#academic-work h2')).toBeInViewport();
-  await expect(page.locator('.project-card')).toHaveCount(23);
+  await expect(page.locator('.project-card')).toHaveCount(24);
   await expect(page.locator('#background .education-card')).toHaveCount(2);
   await page.locator('.site-nav a[href="#background"]').click();
   await expect(page).toHaveURL(/#background$/);
@@ -289,9 +289,10 @@ test('CV additions preserve academic status, research limits, and compact profes
   await expect(parallel).toContainText('four-state cart-pendulum benchmark');
   await expect(parallel).toContainText('measuring-stage controller remained future work');
   await expect(parallel).toContainText('Dr. N. C. Murmu');
-  const software = page.locator('[aria-label="Systems and performance"]');
+  const software = page.locator('#highlights');
   await expect(software.locator('.role-progression')).toContainText('Senior Application Solution Developer, October 2025–present');
-  await expect(software.locator('li')).toHaveCount(5);
+  await expect(software.locator('[aria-label="Data and performance"] li')).toHaveCount(3);
+  await expect(software.locator('[aria-label="Enterprise applications and AI"] li').last()).toHaveText('Also used agentic coding for selected cross-stack development.');
   for (const metric of ['9.5×', '110M+ events/day', '75%+', '97%', '23k+', '99%', '25+', '100k+ row', '63%']) {
     await expect(software).toContainText(metric);
   }
