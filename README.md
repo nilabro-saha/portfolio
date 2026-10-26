@@ -36,7 +36,7 @@ The Rock Stars Gold Award card uses the user-supplied September 2024 badge, copi
 
 Certificate previews are regenerated directly from the individual source PDFs at **400 DPI**, with explicit outer-margin crops and **lossless WebP** encoding. No presentation canvas, padding, credential-number masking, or other redactions are added. The complete certificate designs, signatures, QR codes, and credential IDs remain visible. Full-resolution images open on click; responsive 1600px display copies keep the cards lightweight. Source filenames, crop coordinates, dimensions, DPI, and encoding are recorded in `docs/assets/previews/CERTIFICATE-SOURCES.json`.
 
-To regenerate the seven existing certificate images and the INAE evidence composite:
+To regenerate the nine certificate images and the INAE evidence composite (the IndianOil source is in `../../5. CERTIFICATES/IndianOil Meritorious Student Award.pdf` relative to the prepared-documents folder):
 
 ```sh
 python3 scripts/render_previews.py --source-dir '/path/to/Prepared Documents'

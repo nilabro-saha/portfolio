@@ -5,8 +5,8 @@ const sectionCounts = {
   'academic-work': 5,
   publications: 2,
   background: 2,
-  'academic-achievements': 6,
-  'professional-achievements': 3,
+  'academic-achievements': 7,
+  'professional-achievements': 4,
 };
 
 async function loadPreviews(page) {
@@ -42,7 +42,8 @@ test('preserves all content, evidence previews, and configured destinations', as
     await expect(link).toHaveAttribute('target', '_blank');
     await expect(link).toHaveAccessibleName(/View full-size preview/);
   }
-  await expect(page.locator('.preview-link')).toHaveCount(16);
+  await expect(page.locator('#academic-achievements .project-card').last()).toHaveAttribute('aria-label', 'IndianOil Meritorious Academic Performance');
+  await expect(page.locator('.preview-link')).toHaveCount(18);
   await expect(page.locator('.media-caption, .card-media figcaption')).toHaveCount(0);
   expect(failed).toEqual([]);
   expect(errors).toEqual([]);
@@ -75,7 +76,9 @@ for (const width of [390, 768, 1024, 1440]) {
     for (const [section, count] of Object.entries(sectionCounts)) {
       const grid = page.locator(`#${section} .card-grid`);
       const columns = await grid.evaluate(element => getComputedStyle(element).gridTemplateColumns.split(' ').length);
-      expect(columns).toBe(['publications', 'background'].includes(section) ? Math.min(2, expectedColumns) : expectedColumns);
+      const sectionColumns = ['academic-achievements', 'professional-achievements'].includes(section) && width > 1000 ? 4
+        : ['publications', 'background'].includes(section) ? Math.min(2, expectedColumns) : expectedColumns;
+      expect(columns).toBe(sectionColumns);
       const bounds = await grid.locator('.project-card').evaluateAll(cards => cards.map(card => {
         const box = card.getBoundingClientRect();
         return { left: box.left, right: box.right, clipped: card.scrollWidth > card.clientWidth + 1 };
@@ -155,6 +158,8 @@ for (const width of [390, 768, 1024, 1440]) {
     }
     await page.screenshot({ path: testInfo.outputPath(`portfolio-${width}.png`), fullPage: true });
     await page.screenshot({ path: testInfo.outputPath(`intro-${width}.png`) });
+    await page.locator('#professional-achievements').screenshot({ path: testInfo.outputPath(`professional-achievements-${width}.png`) });
+    await page.locator('#academic-achievements').screenshot({ path: testInfo.outputPath(`academic-achievements-${width}.png`) });
     await page.locator('#background').screenshot({ path: testInfo.outputPath(`background-${width}.png`) });
     await page.locator('#highlights').screenshot({ path: testInfo.outputPath(`highlights-${width}.png`) });
     await page.locator('#academic-work').screenshot({ path: testInfo.outputPath(`research-${width}.png`) });
@@ -194,7 +199,7 @@ test('without JavaScript all content and native navigation remain available', as
   await page.locator('.site-nav a[href="#academic-work"]').click();
   await expect(page).toHaveURL(/#academic-work$/);
   await expect(page.locator('#academic-work h2')).toBeInViewport();
-  await expect(page.locator('.project-card')).toHaveCount(21);
+  await expect(page.locator('.project-card')).toHaveCount(23);
   await expect(page.locator('#background .education-card')).toHaveCount(2);
   await page.locator('.site-nav a[href="#background"]').click();
   await expect(page).toHaveURL(/#background$/);
@@ -291,7 +296,10 @@ test('CV additions preserve academic status, research limits, and compact profes
     await expect(software).toContainText(metric);
   }
   await expect(page.locator('#highlights')).toContainText('May 2021–May 2022');
-  await expect(page.locator('.additional-certifications')).toContainText('OCI Generative AI · OCI DevOps');
+  await expect(page.locator('#professional-achievements .project-card').last()).toHaveAttribute('aria-label', 'Oracle OCI DevOps certification');
+  await expect(page.locator('[aria-label="Oracle OCI DevOps certification"]')).toContainText('Awarded December 2024');
+  await expect(page.locator('.additional-certifications')).toContainText('OCI Generative AI');
+  await expect(page.locator('.additional-certifications')).not.toContainText('OCI DevOps');
   await expect(page.locator('main')).not.toContainText('GRE');
   await expect(page.locator('main')).not.toContainText('TOEFL');
   await expect(page.locator('main')).not.toContainText('Outstanding');
@@ -485,7 +493,7 @@ test('certificate cards load responsive previews and retain high-resolution full
   const manifest = JSON.parse(await readFile(new URL('../docs/assets/previews/CERTIFICATE-SOURCES.json', import.meta.url), 'utf8'));
   await page.goto('/');
   await loadPreviews(page);
-  expect(manifest).toHaveLength(8);
+  expect(manifest).toHaveLength(10);
   for (const entry of manifest) {
     const image = page.locator(`.card-media img[src^="./assets/previews/${entry.name}.webp?"]`);
     await expect(image).toHaveCount(1);

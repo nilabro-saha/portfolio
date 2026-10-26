@@ -2,6 +2,13 @@
 .button.primary { color: white; background: var(--vermilion-dark); border-color: var(--vermilion-dark); }
 .button:hover { border-color: var(--vermilion-dark); transform: translateY(-1px); }
 .card-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.achievements-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.achievements-grid .preview-link { aspect-ratio: 2 / 1; }
+.achievements-grid .card-copy { padding: 16px; }
+.achievements-grid h3 { font-size: 1rem; }
+.achievements-grid .card-copy > p:not([class]) { margin-top: 10px; line-height: 1.6; }
+.achievements-grid .card-detail { margin-top: 12px; padding-top: 10px; }
+.achievements-grid .media-links { padding-top: 12px; }
 .publication-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .education-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .education-heading { display: grid; grid-template-columns: minmax(0, 1fr) 80px; align-items: start; gap: 20px; }

@@ -25,6 +25,7 @@ OUT = Path(__file__).resolve().parents[1] / "docs" / "assets" / "previews"
 # Trim only the source page's outer blank/scanner margins. Keep the complete
 # certificate designs, signatures, QR code, serial numbers, and credential IDs.
 CERTIFICATES = (
+    ("../../5. CERTIFICATES/IndianOil Meritorious Student Award.pdf", (.026, .036, .977, .952), "indianoil-meritorious-2022"),
     ("Academic Certificates/001-OPJEMS-2019-saha-nilabro.pdf", (.004, 0, 1, 1), "opjems-2019"),
     ("Academic Certificates/002-OPJEMS-2020-saha-nilabro.pdf", (.045, .045, .962, .93), "opjems-2020"),
     ("Academic Certificates/003-CMERI-internship-saha-nilabro.pdf", (.020, .054, .962, .95), "cmeri-internship"),
@@ -32,6 +33,7 @@ CERTIFICATES = (
     ("Academic Certificates/005-iNaCoMM2021-saha-nilabro.pdf", (.029, .042, .97, .962), "inacomm-2021"),
     ("Professional Certificates/2026-06-05 - Oracle GoldenGate 19c Implementation Certified Professional.pdf", (.063, .074, .94, .878), "oracle-goldengate"),
     ("Professional Certificates/2026-02-16 - Fusion AI Agent Studio Developer Professional.pdf", (.063, .074, .94, .878), "oracle-fusion-ai"),
+    ("Professional Certificates/2024-12-02 - OCI DevOps Professional Ceritifcate.pdf", (.063, .074, .94, .878), "oracle-devops"),
 )
 
 
@@ -104,7 +106,9 @@ def update_dimensions(results: list[dict]) -> None:
             tag = re.sub(r'\s+(?:srcset|sizes)="[^"]*"', '', tag)
             tag = re.sub(r'\bsrc="[^"]*"', f'src="{full_url}"', tag)
             variants = f'./assets/previews/{result["name"]}-preview.webp?v={result["version"]} {result["preview_width"]}w, {full_url} {result["width"]}w'
-            sizes = '(max-width: 700px) calc(100vw - 30px), (max-width: 1000px) calc((100vw - 62px) / 2), 328px'
+            certificates = {name for _, _, name in CERTIFICATES} | {'inae-mentee'}
+            desktop_width = 242 if result['name'] in certificates else 328
+            sizes = f'(max-width: 700px) calc(100vw - 30px), (max-width: 1000px) calc((100vw - 62px) / 2), {desktop_width}px'
             return tag.replace('/>', f' srcset="{variants}" sizes="{sizes}"/>')
         html = re.sub(pattern, replace, html)
         link = r'href="\./assets/previews/' + re.escape(result["name"]) + r'\.webp(?:\?[^"]*)?"'

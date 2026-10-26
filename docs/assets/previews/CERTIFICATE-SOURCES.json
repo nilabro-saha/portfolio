@@ -1,5 +1,26 @@
 [
   {
+    "name": "indianoil-meritorious-2022",
+    "width": 4448,
+    "height": 3034,
+    "bytes": 10415942,
+    "preview_width": 1600,
+    "preview_height": 1091,
+    "version": "60af7ab1b3de",
+    "source": "../../5. CERTIFICATES/IndianOil Meritorious Student Award.pdf",
+    "page": 1,
+    "crop": [
+      0.026,
+      0.036,
+      0.977,
+      0.952
+    ],
+    "dpi": 400,
+    "lossless": true,
+    "redacted": false,
+    "added_padding": 0
+  },
+  {
     "name": "opjems-2019",
     "width": 4588,
     "height": 3200,
@@ -164,5 +185,26 @@
     "added_padding": 0,
     "note": "Two separate excerpts: approval passage and complete named appendix row; an 8px separator distinguishes them at 400 DPI.",
     "version": "8cca1f9df9b2"
+  },
+  {
+    "name": "oracle-devops",
+    "width": 3859,
+    "height": 2733,
+    "bytes": 2331536,
+    "preview_width": 1600,
+    "preview_height": 1133,
+    "version": "19d1e8eaf556",
+    "source": "Professional Certificates/2024-12-02 - OCI DevOps Professional Ceritifcate.pdf",
+    "page": 1,
+    "crop": [
+      0.063,
+      0.074,
+      0.94,
+      0.878
+    ],
+    "dpi": 400,
+    "lossless": true,
+    "redacted": false,
+    "added_padding": 0
   }
 ]
