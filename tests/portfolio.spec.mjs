@@ -463,7 +463,7 @@ test('fresh link configuration overrides an older browser-cached copy', async ({
   }
 });
 
-test('repository images replace only the selected diagrams and open the complete figures', async ({ page }) => {
+test('research card images use the selected source figures and open full-size previews', async ({ page }) => {
   await page.goto('/');
   await loadPreviews(page);
   const figures = [
@@ -485,7 +485,7 @@ test('repository images replace only the selected diagrams and open the complete
     await expect(popup).toHaveURL(new RegExp(`/assets/previews/${file.replace('.', '\\.')}$`));
     await popup.close();
   }
-  await expect(page.locator('[aria-label="MechAnalyzer mechanism simulation"] .preview-link img')).toHaveAttribute('src', './assets/illustrations/mechanalyzer.svg');
+  await expect(page.locator('[aria-label="MechAnalyzer mechanism simulation"] .preview-link img')).toHaveAttribute('src', /assets\/previews\/mechanalyzer-mechanisms\.webp\?v=/);
   await expect(page.locator('#academic-work .repository-preview')).toHaveCount(2);
 });
 

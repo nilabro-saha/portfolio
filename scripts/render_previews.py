@@ -124,6 +124,7 @@ def main() -> None:
     parser.add_argument("--seminar-two", type=Path)
     parser.add_argument("--gear-paper", type=Path)
     parser.add_argument("--linkage-paper", type=Path)
+    parser.add_argument("--mechanalyzer-review", type=Path)
     args = parser.parse_args()
     source = args.source_dir.expanduser().resolve()
     if args.dpi < 72:
@@ -153,6 +154,9 @@ def main() -> None:
         if pdf:
             image = render_page(pdf.expanduser().resolve(), 1, args.dpi)
             results.append(save(crop(image, (0, 0, 1, bottom)), name))
+    if args.mechanalyzer_review:
+        image = render_page(args.mechanalyzer_review.expanduser().resolve(), 5, args.dpi)
+        results.append(save(crop(image, (.112, .144, .885, .948)), "mechanalyzer-mechanisms"))
     update_dimensions(results)
 
 

@@ -1,6 +1,6 @@
 # Academic research figures
 
-The user selected these already-public repository figures for the portfolio. Original JPEG bytes and colors are preserved. CSS frames one representative panel on the card; the preview link opens the complete figure.
+Sources for academic research card imagery. Repository figures preserve original JPEG bytes and colors; CSS frames a representative panel, with the complete figure opening on click. The MechAnalyzer grid is rendered from the user-provided review PDF.
 
 ## exoskeleton-assembly.jpg
 
@@ -69,3 +69,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
+
+## mechanalyzer-mechanisms.webp
+
+- Source: `2021 Review/2021 Review.pdf`, RAMA Development Group, edited by Nilabro Saha; published 2 March 2022.
+- Location: `11. NIT DURGAPUR DOCUMENTS/RoboAnalyzer and MechAnalyzer RAMA Development Project/2021 Review/2021 Review.pdf` within the user's Nilabro Saha documents.
+- Page: 5, “New Mechanisms in MechAnalyzer Core Module”.
+- Crop: normalized bounds `(0.112, 0.144, 0.885, 0.948)`, retaining the complete four-panel grid of 11 mechanisms and removing the slide title and outer whitespace.
+- Render: 400 DPI, lossless WebP; a 1600px responsive display copy is provided. No recoloring, redaction, or added padding.
+- Reproduction: pass `--mechanalyzer-review '/path/to/2021 Review.pdf'` to `scripts/render_previews.py` alongside its source directory.
